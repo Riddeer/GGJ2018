@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pool : MonoBehaviour
+public class WaterPool : MonoBehaviour
 {
 	public int m_PoolBullet = 50;
 
@@ -50,6 +50,13 @@ public class Pool : MonoBehaviour
 	private void UpdateLeftBulletShow()
 	{
 		float sliderVal = (float)m_CurBullet / (float)m_PoolBullet;
+		
+		if (sliderVal < 0.05f)
+		{
+			Destroy(gameObject);
+			return;
+		}
+
 		foreach (KeyValuePair<GameObject, Vector3> one in m_DefaultChildrenScale)
 		{
 			one.Key.transform.localScale = one.Value * sliderVal;
