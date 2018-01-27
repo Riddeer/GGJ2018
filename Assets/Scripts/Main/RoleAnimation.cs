@@ -18,15 +18,16 @@ public class RoleAnimation : MonoBehaviour
 
 
     public BoneFollower m_BoneFollower;
-    public SkeletonAnimation m_SkeAnimation;
+    public SkeletonAnimation m_SkeAnimation_0;
+    public SkeletonAnimation m_SkeAnimation_1;
 
-    [SpineAnimation(dataField: "m_SkeAnimation")]
+    [SpineAnimation(dataField: "m_SkeAnimation_0")]
     public string m_AniName_Move = "Move_01";
-    [SpineAnimation(dataField: "m_SkeAnimation")]
+    [SpineAnimation(dataField: "m_SkeAnimation_0")]
     public string m_AniName_Idle = "Idle_01";
-    [SpineAnimation(dataField: "m_SkeAnimation")]
+    [SpineAnimation(dataField: "m_SkeAnimation_0")]
     public string m_AniName_Die = "Death_01";
-    [SpineAnimation(dataField: "m_SkeAnimation")]
+    [SpineAnimation(dataField: "m_SkeAnimation_0")]
     public string m_AniName_TransMission = "Transmission";
     public AttackAimType m_AtkAimType = AttackAimType.Aim;
     public Transform[] m_NormalRotate;
@@ -51,14 +52,19 @@ public class RoleAnimation : MonoBehaviour
     {
         m_Base = gameObject.GetComponent<RoleBase>();
 
-        m_DefaultTimeScale = m_SkeAnimation.timeScale;
+        m_DefaultTimeScale = m_SkeAnimation_0.timeScale;
     }
 
     // Use this for initialization
     void Start()
     {
-        m_SkeAnimation.state.Event += m_Base.HandleEvent;
-        m_SkeAnimation.state.Complete += m_Base.HandleComplete;
+        m_SkeAnimation_0.state.Event += m_Base.HandleEvent;
+        m_SkeAnimation_0.state.Complete += m_Base.HandleComplete;
+        if (m_SkeAnimation_1)
+        {
+            m_SkeAnimation_1.state.Event += m_Base.HandleEvent;
+            m_SkeAnimation_1.state.Complete += m_Base.HandleComplete;
+        }
         m_CurAlpha = 1f;
         m_CurColor = Color.white;
         // m_player = Global.instance.m_Player_Mine;
@@ -175,12 +181,14 @@ public class RoleAnimation : MonoBehaviour
 
     public void SetSkin(string skinName)
     {
-        m_SkeAnimation.skeleton.SetSkin(skinName);
+        m_SkeAnimation_0.skeleton.SetSkin(skinName);
+        if (m_SkeAnimation_1) m_SkeAnimation_1.skeleton.SetSkin(skinName);
     }
     public void Stop(int trackIndex)
     {
         // TrackEntry track = m_SkeAnimation.state.GetCurrent(trackIndex);
-        m_SkeAnimation.state.ClearTrack(trackIndex);
+        m_SkeAnimation_0.state.ClearTrack(trackIndex);
+        if (m_SkeAnimation_1) m_SkeAnimation_0.state.ClearTrack(trackIndex);
     }
 
     // this attack is used by slime
@@ -198,7 +206,7 @@ public class RoleAnimation : MonoBehaviour
     public void Wink()
     {
         this.RunAnimation("Face_Wink", false, 3, false);
-        var empty = m_SkeAnimation.state.AddEmptyAnimation(3, 0.5f, 0.1f);
+        var empty = m_SkeAnimation_0.state.AddEmptyAnimation(3, 0.5f, 0.1f);
         empty.AttachmentThreshold = 1f;
 
     }
@@ -209,7 +217,7 @@ public class RoleAnimation : MonoBehaviour
     public void AngryFace()
     {
         this.RunAnimation("Face_Attack", false, 4, false);
-        var empty = m_SkeAnimation.state.AddEmptyAnimation(4, 0.5f, 1f);
+        var empty = m_SkeAnimation_0.state.AddEmptyAnimation(4, 0.5f, 1f);
         empty.AttachmentThreshold = 1f;
     }
     public void StartSetWink()
@@ -242,7 +250,8 @@ public class RoleAnimation : MonoBehaviour
     {
         // PauseAnimation();
         // m_SkeAnimation.state.ClearTracks();
-        m_SkeAnimation.state.ClearTracks();
+        m_SkeAnimation_0.state.ClearTracks();
+        if (m_SkeAnimation_1) m_SkeAnimation_1.state.ClearTracks();
         this.RunAnimation(m_AniName_Die, false, 5, false);
 
         // falling action
@@ -260,12 +269,13 @@ public class RoleAnimation : MonoBehaviour
 
     public void PauseAnimation()
     {
-        m_SkeAnimation.timeScale = 0;
+        m_SkeAnimation_0.timeScale = 0;
+        if (m_SkeAnimation_1) m_SkeAnimation_1.timeScale = 0;
     }
 
     public float GetCurAniTime()
     {
-        Spine.TrackEntry curEntry = m_SkeAnimation.state.GetCurrent(0);
+        Spine.TrackEntry curEntry = m_SkeAnimation_0.state.GetCurrent(0);
         if (curEntry != null)
         {
             // return curEntry.AnimationTime;
@@ -295,23 +305,24 @@ public class RoleAnimation : MonoBehaviour
         bool overrideSameName = false)
     {
         bool isPlayingTheSame = false;
-        if (m_SkeAnimation && m_SkeAnimation.state.GetCurrent(0) != null)
-            isPlayingTheSame = m_SkeAnimation.state.GetCurrent(0).Animation.Name == aniName;
+        if (m_SkeAnimation_0 && m_SkeAnimation_0.state.GetCurrent(0) != null)
+            isPlayingTheSame = m_SkeAnimation_0.state.GetCurrent(0).Animation.Name == aniName;
 
         isPlayingTheSame = false;
-        if (m_SkeAnimation && m_SkeAnimation.state.GetCurrent(0) != null)
-            isPlayingTheSame = m_SkeAnimation.state.GetCurrent(0).Animation.Name == aniName;
+        if (m_SkeAnimation_0 && m_SkeAnimation_0.state.GetCurrent(0) != null)
+            isPlayingTheSame = m_SkeAnimation_0.state.GetCurrent(0).Animation.Name == aniName;
 
         if (overrideSameName)
         {
-            m_SkeAnimation.state.SetAnimation(index, aniName, loop);
+            m_SkeAnimation_0.state.SetAnimation(index, aniName, loop);
+            if (m_SkeAnimation_1) m_SkeAnimation_1.state.SetAnimation(index, aniName, loop);
         }
         else
         {
             if (!isPlayingTheSame)
             {
-
-                m_SkeAnimation.state.SetAnimation(index, aniName, loop);
+                m_SkeAnimation_0.state.SetAnimation(index, aniName, loop);
+                if (m_SkeAnimation_1) m_SkeAnimation_1.state.SetAnimation(index, aniName, loop);
             }
         }
 
@@ -399,19 +410,20 @@ public class RoleAnimation : MonoBehaviour
         // mpb.SetColor("_Color", m_CurColor);
         // mpb.SetColor("_OccludedColor", m_CurColor);
         mpb.SetFloat("_PlaneAlpha", m_CurAlpha);
-        m_SkeAnimation.GetComponent<MeshRenderer>().SetPropertyBlock(mpb);
-
+        m_SkeAnimation_0.GetComponent<MeshRenderer>().SetPropertyBlock(mpb);
+        if (m_SkeAnimation_1) m_SkeAnimation_1.GetComponent<MeshRenderer>().SetPropertyBlock(mpb);
     }
 
     private void SetTimeScale(float s)
     {
-        m_SkeAnimation.timeScale = s;
+        m_SkeAnimation_0.timeScale = s;
+        if (m_SkeAnimation_1) m_SkeAnimation_1.timeScale = s;
     }
 
 
     public float GetAlpha()
     {
-        Material material = m_SkeAnimation.GetComponent<Renderer>().material;
+        Material material = m_SkeAnimation_0.GetComponent<Renderer>().material;
         // return material.GetColor("_Color").a;
         return material.GetFloat("_PlaneAlpha");
     }
@@ -517,6 +529,29 @@ public class RoleAnimation : MonoBehaviour
         foreach (RotatedSpineNodes one in m_AimNodes)
         {
             one.TurnToTargetRotation(curFaceVec, m_AimTurnSpeed);
+        }
+    }
+
+    public void SetCurTransmissionRes(TransmissionType transType)
+    {
+        switch (transType)
+        {
+            case TransmissionType.Fat:
+                {
+                    m_SkeAnimation_0.gameObject.SetActive(true);
+                    m_SkeAnimation_1.gameObject.SetActive(false);
+                }
+                break;
+
+            case TransmissionType.Thin:
+                {
+                    m_SkeAnimation_0.gameObject.SetActive(false);
+                    m_SkeAnimation_1.gameObject.SetActive(true);
+                }
+                break;
+
+            default:
+                break;
         }
     }
 

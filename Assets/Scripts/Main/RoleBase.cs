@@ -73,7 +73,7 @@ public abstract class RoleBase : MonoBehaviour
     public bool m_Invincible = false;
     [HideInInspector]
     public long m_CurHP = 0;
-    [HideInInspector]
+    // [HideInInspector]
     public RoleStatus m_CurStatus = RoleStatus.NULL;
     [HideInInspector]
     public int m_CurPlanesID = 0;
@@ -381,7 +381,7 @@ public abstract class RoleBase : MonoBehaviour
     {
         return m_Flip;
     }
-    public void SetFlipX(bool flipX)
+    public virtual void SetFlipX(bool flipX)
     {
         if (m_Flip == flipX) return;
         m_Flip = flipX;
@@ -518,7 +518,7 @@ public abstract class RoleBase : MonoBehaviour
         }
     }
 
-    private void SetCurVec_Move(Vector2 vec)
+    public void SetCurVec_Move(Vector2 vec)
     {
         if (m_CurVec_Move == vec) return;
 

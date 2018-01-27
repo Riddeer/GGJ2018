@@ -35,7 +35,7 @@ public class BD_SlimeAnimation : Action
     public override void OnAwake()
     {
         m_RoleAnimation = gameObject.GetComponentInChildren<RoleAnimation>();
-        m_SkeletonAnimation = gameObject.GetComponentInChildren<RoleAnimation>().m_SkeAnimation;
+        m_SkeletonAnimation = gameObject.GetComponentInChildren<RoleAnimation>().m_SkeAnimation_0;
     }
     public override void OnStart()
     {
