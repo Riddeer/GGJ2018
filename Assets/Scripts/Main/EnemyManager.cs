@@ -13,6 +13,7 @@ public class EnemyManager : MonoBehaviour
     public Vector2 m_PosXBounds;
     public Vector2 m_PosYBounds;
 
+
     // int : ID of view
     [HideInInspector]
     public List<RoleBase> m_Enemies =
@@ -52,7 +53,41 @@ public class EnemyManager : MonoBehaviour
             this.CreateOneEnemy();
         }
     }
+    public void CreateEnemyWave(int num, float anchorX, float anchorY,float mixArea, float maxArea)
+    {
+        for (int i = 0; i < num; i++)
+        {
+            float temX = Random.Range(1, 100);
 
+            if (temX > 50)
+            {
+
+                temX = Random.Range((anchorX + mixArea), (anchorX + maxArea));
+            }
+            else
+            {
+                temX = -Random.Range((anchorX + mixArea), (anchorX + maxArea));
+            }
+            float temY = Random.Range(1, 100);
+            if (temY > 50)
+            {
+
+                temY = Random.Range((anchorY + mixArea), (anchorY + maxArea));
+            }
+            else
+            {
+                temY = -Random.Range((anchorY + mixArea), (anchorY + maxArea));
+            }
+            Vector3 testPos = new Vector3(temX,temY);
+            GameObject oneE = m_EnemyPrefabs[Random.Range(0, m_EnemyPrefabs.Length)];
+            GameObject eGO = Instantiate(
+            Resources.Load("Enemy/" + oneE.name),
+            testPos,
+            Quaternion.identity) as GameObject;
+
+        }
+
+    }
     private void SetDataByCrossSceneDataMng()
     {
         CrossSceneDataManager crossMng = CrossSceneDataManager.instance;
