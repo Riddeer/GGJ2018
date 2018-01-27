@@ -135,7 +135,12 @@ public class Hero : HeroModel
         // set position
         if (m_CurTransType == TransmissionType.Thin)
         {
-
+            transform.position = new Vector3(
+                m_OtherHero.GetFootPos().x + 
+                    m_TransmissionDis * (otherIsRight ? -1f : 1f),
+                m_OtherHero.GetFootPos().y,
+                0
+            );
         }
     }
 
