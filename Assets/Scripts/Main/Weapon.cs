@@ -55,7 +55,7 @@ public class Weapon : MonoBehaviour
     public float m_AlertRange = 10f;
     public float prepareFireTime = 0f;
     public AimArrowType m_AimType;
-    private int m_CurBullet = 0;
+    public int m_CurBullet = 0;
     private IEnumerator m_IE_Reload = null;
 	private bool m_IsReloading = false;
 

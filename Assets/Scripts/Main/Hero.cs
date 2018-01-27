@@ -24,6 +24,7 @@ public class Hero : HeroModel
     public TransmissionType m_CurTransType = TransmissionType.Fat;
     public Slider m_ChargeSlider;
     public Slider m_BulletSlider;
+    public Text m_BulletText;
     public GameObject m_CurTarMark;
     public GameObject[] m_WeaponsToCreate;
     public float m_SuckSpeed = 10f;
@@ -374,10 +375,16 @@ public class Hero : HeroModel
     private void UpdateBulletShow()
     {
         if (m_IsReloading) return;
-        if (m_BulletSlider == null) return;
+        if (m_BulletText)
+        {
+            m_BulletText.text = m_CurWeapon.m_CurBullet + 
+                " / " + m_AllBullet;
+        }
 
-        m_BulletSlider.DOValue(m_CurWeapon.GetBulletPercent(), 0.5f);
-
+        if (m_BulletSlider)
+        {
+            m_BulletSlider.DOValue(m_CurWeapon.GetBulletPercent(), 0.5f);
+        }
     }
 
 

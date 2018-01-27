@@ -51,7 +51,7 @@ public class WaterPool : MonoBehaviour
 	{
 		float sliderVal = (float)m_CurBullet / (float)m_PoolBullet;
 		
-		if (sliderVal < 0.05f)
+		if (sliderVal <= 0f)
 		{
 			Destroy(gameObject);
 			return;
