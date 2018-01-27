@@ -37,11 +37,11 @@ public class ParticleManager : MonoBehaviour
         m_Parent = gameObject.GetComponent<Transform>();
         CalcCameraSize();
         flyAnchor = CalcParticleAnchor(cameraSizeX,cameraSizeY);
-        CreateParticsOnMap( m_ParticSize_X, m_ParticSize_Y, 
-        rainAnchor, prefab_Rain,RainsOnGround);
-        CreateParticsOnMap(cameraSizeX,cameraSizeY,flyAnchor,prefab_Fly,FlysOnGround);
-        SetParticActive(Camera.main.transform.position.x, Camera.main.transform.position.y,RainsOnGround,0.75f);
-        SetParticActive(Camera.main.transform.position.x,Camera.main.transform.position.y,FlysOnGround,1f);
+        // CreateParticsOnMap( m_ParticSize_X, m_ParticSize_Y, 
+        // rainAnchor, prefab_Rain,RainsOnGround);
+        // CreateParticsOnMap(cameraSizeX,cameraSizeY,flyAnchor,prefab_Fly,FlysOnGround);
+        // SetParticActive(Camera.main.transform.position.x, Camera.main.transform.position.y,RainsOnGround,0.75f);
+        // SetParticActive(Camera.main.transform.position.x,Camera.main.transform.position.y,FlysOnGround,1f);
         
     }
     void Update()
