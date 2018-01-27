@@ -38,12 +38,16 @@ public class Hero : HeroModel
     private Hero m_OtherHero;
     private const float m_MaxDisForTransmission = 5f;
     private const float m_TransmissionDis = 3f;
+    private IEnumerator m_IE_SuckPool;
+    private WaterPool m_CurSuckPool;
 
     protected override void Awake()
     {
         base.Awake();
         m_IsReadyForTransmission = false;
         m_IsInDisForTransmission = false;
+        m_IE_SuckPool = null;
+        m_CurSuckPool = null;
     }
 
     protected override void Start()
@@ -132,6 +136,14 @@ public class Hero : HeroModel
     {
         m_IsReadyForTransmission = false;
         m_IsInDisForTransmission = false;
+
+        // stop suck
+        if (m_IE_SuckPool != null)
+        {
+            StopCoroutine(m_IE_SuckPool);
+            m_IE_SuckPool = null;
+            m_CurSuckPool = null;
+        }
 
         m_CurStatus = RoleStatus.Transmission;
         m_AniMng.Transmission();
@@ -306,7 +318,7 @@ public class Hero : HeroModel
     protected override IEnumerator IE_ReloadWeapon()
     {
         m_IsReloading = true;
-        float endVal = m_AllBullet >= m_CurWeapon.m_MaxBullet? 1f: 
+        float endVal = m_AllBullet >= m_CurWeapon.m_MaxBullet ? 1f :
             (float)m_AllBullet / (float)m_CurWeapon.m_MaxBullet;
         m_CurWeapon.SetFullBullet(ref m_AllBullet);
 
@@ -414,9 +426,60 @@ public class Hero : HeroModel
     {
         base.OnTrigger(col);
 
-        Pool pool = col.GetComponent<Pool>();
-        if (pool) pool.BeSucked(this);
+        WaterPool pool = col.gameObject.GetComponent<WaterPool>();
+        if (m_CurTransType == TransmissionType.Thin &&
+        m_CurStatus != RoleStatus.Transmission && pool)
+        {
+            if (pool != m_CurSuckPool)
+            {
+                if (m_IE_SuckPool != null)
+                {
+                    StopCoroutine(m_IE_SuckPool);
+                    m_IE_SuckPool = null;
+                    m_CurSuckPool = null;
+                }
+                m_IE_SuckPool = IE_SuckPool(pool);
+                StartCoroutine(m_IE_SuckPool);
+            }
+        }
     }
+    protected override void OnTrigger_Exit(Collider2D col)
+    {
+        base.OnTrigger_Exit(col);
 
+        WaterPool pool = col.gameObject.GetComponent<WaterPool>();
+        if (m_CurTransType == TransmissionType.Thin &&
+        m_CurStatus != RoleStatus.Transmission && pool)
+        {
+            if (pool == m_CurSuckPool)
+            {
+                if (m_IE_SuckPool != null)
+                {
+                    StopCoroutine(m_IE_SuckPool);
+                    m_IE_SuckPool = null;
+                    m_CurSuckPool = null;
+                }
+            }
+        }
+    }
+    private IEnumerator IE_SuckPool(WaterPool pool)
+    {
+        m_CurSuckPool = pool;
+
+        while (true)
+        {
+            if (m_CurSuckPool)
+            {
+                m_CurSuckPool.BeSucked(this);
+            }
+            else
+            {
+                StopCoroutine(m_IE_SuckPool);
+                m_IE_SuckPool = null;
+            }
+
+            yield return null;
+        }
+    }
 
 }
