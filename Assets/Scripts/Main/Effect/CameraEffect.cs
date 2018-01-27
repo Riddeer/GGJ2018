@@ -48,7 +48,7 @@ public class CameraEffect : MonoBehaviour
         // SetFollowTar(Global.instance.m_Player.transform.position);
         m_SunDefaultIntensity = m_SunLight.intensity;
         // auto loop flash
-        StartCoroutine(IE_LoopFlash());
+        // StartCoroutine(IE_LoopFlash());
 
         // set follow target
         this.SetFollowTar(Global.instance.m_Hero_01.transform);
