@@ -31,7 +31,7 @@ public class Pool : MonoBehaviour
 	// update function
     public void BeSucked(Hero sucker)
 	{
-		m_SuckedVal += sufcker.m_SuckSpeed * Time.deltaTime;
+		m_SuckedVal += sucker.m_SuckSpeed * Time.deltaTime;
 		if (m_SuckedVal > 1)
 		{
 			float floor = Mathf.Floor(m_SuckedVal);
