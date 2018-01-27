@@ -52,7 +52,10 @@ public class EnemyManager : MonoBehaviour
             this.CreateOneEnemy();
         }
     }
-
+    public void CreateEnemyWave(int num ,float anchorX,float mixArea,float maxArea)
+    {
+        
+    }
     private void SetDataByCrossSceneDataMng()
     {
         CrossSceneDataManager crossMng = CrossSceneDataManager.instance;
