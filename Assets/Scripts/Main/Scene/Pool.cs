@@ -36,8 +36,12 @@ public class Pool : MonoBehaviour
 		{
 			float floor = Mathf.Floor(m_SuckedVal);
 			m_SuckedVal -= floor;
-			m_CurBullet -= (int)floor;
-			sucker.m_AllBullet += (int)floor;
+			if (m_CurBullet >= (int)floor)
+			{
+				m_CurBullet -= (int)floor;
+				sucker.m_AllBullet += (int)floor;
+			}
+			
 		}
 
 		this.UpdateLeftBulletShow();
