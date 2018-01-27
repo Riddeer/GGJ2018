@@ -18,7 +18,7 @@ public enum RoleStatus
     Move = 2,
     Attack = 3,
     Atked = 4,
-    Rage = 5,
+    Transmission = 5,
 
     SIZE
 };

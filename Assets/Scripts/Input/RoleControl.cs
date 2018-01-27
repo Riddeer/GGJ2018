@@ -23,7 +23,6 @@ public class RoleControl : MonoBehaviour
     private void UpdateCtrl_XCI()
     {
         Vector2 vec = new Vector2();
-        bool moved = false;
 
         // Left Stick
         if (XCI.GetButtonDown(XboxButton.LeftStick, m_Ctrler))
@@ -44,8 +43,11 @@ public class RoleControl : MonoBehaviour
         vec.y = axisLY;
         if (vec.magnitude > m_MinStickDragDis)
         {
-            moved = true;
             InputManager.instance.InputCommand(m_Role, CommandType.Move, vec);
+        }
+        else
+        {
+            InputManager.instance.InputCommand(m_Role, CommandType.StopMove);
         }
 
         // Right stick movement
@@ -56,53 +58,63 @@ public class RoleControl : MonoBehaviour
         if (vec.magnitude > m_MinStickDragDis)
         {
             InputManager.instance.InputCommand(m_Role, CommandType.Attack, vec);
-            InputManager.instance.InputCommand(m_Role, CommandType.StopAttack);
         }
-
+        else
+        {
+            InputManager.instance.InputCommand(m_Role, CommandType.StopAttack);
+            InputManager.instance.InputCommand(m_Role, CommandType.CastAttack);
+        }
 
         // D-Pad
         if (XCI.GetDPad(XboxDPad.Up, m_Ctrler))
         {
-            moved = true;
             InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.up);
         }
         if (XCI.GetDPad(XboxDPad.Down, m_Ctrler))
         {
-            moved = true;
             InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.down);
         }
         if (XCI.GetDPad(XboxDPad.Left, m_Ctrler))
         {
-            moved = true;
             InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.left);
         }
         if (XCI.GetDPad(XboxDPad.Right, m_Ctrler))
         {
-            moved = true;
             InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.right);
+        }
+        if (XCI.GetDPadUp(XboxDPad.Up, m_Ctrler) || XCI.GetDPadUp(XboxDPad.Down, m_Ctrler) ||
+        XCI.GetDPadUp(XboxDPad.Left, m_Ctrler) || XCI.GetDPadUp(XboxDPad.Right, m_Ctrler))
+        {
+            InputManager.instance.InputCommand(m_Role, CommandType.StopMove);
         }
 
         // A,B,X,Y
         if (XCI.GetButton(XboxButton.A, m_Ctrler))
         {
-            InputManager.instance.InputCommand(m_Role, CommandType.Attack, Vector2.down);
-            InputManager.instance.InputCommand(m_Role, CommandType.StopAttack);
+            // InputManager.instance.InputCommand(m_Role, CommandType.Attack, Vector2.down);
+            if (m_Role.m_IsInDisForTransmission)
+            {
+                m_Role.m_IsReadyForTransmission = true;
+            }
         }
-        if (XCI.GetButton(XboxButton.B, m_Ctrler))
-        {
-            InputManager.instance.InputCommand(m_Role, CommandType.Attack, Vector2.right);
-            InputManager.instance.InputCommand(m_Role, CommandType.StopAttack);
-        }
-        if (XCI.GetButton(XboxButton.X, m_Ctrler))
-        {
-            InputManager.instance.InputCommand(m_Role, CommandType.Attack, Vector2.left);
-            InputManager.instance.InputCommand(m_Role, CommandType.StopAttack);
-        }
-        if (XCI.GetButton(XboxButton.Y, m_Ctrler))
-        {
-            InputManager.instance.InputCommand(m_Role, CommandType.Attack, Vector2.up);
-            InputManager.instance.InputCommand(m_Role, CommandType.StopAttack);
-        }
+        // if (XCI.GetButton(XboxButton.B, m_Ctrler))
+        // {
+        //     InputManager.instance.InputCommand(m_Role, CommandType.Attack, Vector2.right);
+        // }
+        // if (XCI.GetButton(XboxButton.X, m_Ctrler))
+        // {
+        //     InputManager.instance.InputCommand(m_Role, CommandType.Attack, Vector2.left);
+        // }
+        // if (XCI.GetButton(XboxButton.Y, m_Ctrler))
+        // {
+        //     InputManager.instance.InputCommand(m_Role, CommandType.Attack, Vector2.up);
+        // }
+        // if (XCI.GetButtonUp(XboxButton.A, m_Ctrler) || XCI.GetButtonUp(XboxButton.B, m_Ctrler) ||
+        // XCI.GetButtonUp(XboxButton.X, m_Ctrler) || XCI.GetButtonUp(XboxButton.Y, m_Ctrler))
+        // {
+        //     InputManager.instance.InputCommand(m_Role, CommandType.StopAttack);
+        //     InputManager.instance.InputCommand(m_Role, CommandType.CastAttack);
+        // }
 
         // Trigger input
         float trigL = XCI.GetAxis(XboxAxis.LeftTrigger, m_Ctrler);
@@ -127,38 +139,27 @@ public class RoleControl : MonoBehaviour
         {
 
         }
-
-        // idle
-        if (!moved)
-        {
-            InputManager.instance.InputCommand(m_Role, CommandType.StopMove);
-        }
     }
     private void UpdateCtrl_KeyBoard()
     {
-        bool moved = false;
         // player 1
         if (m_Ctrler == XboxController.First)
         {
             // move
             if (Input.GetKey(KeyCode.W))
             {
-                moved = true;
                 InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.up);
             }
             if (Input.GetKey(KeyCode.A))
             {
-                moved = true;
                 InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.left);
             }
             if (Input.GetKey(KeyCode.S))
             {
-                moved = true;
                 InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.down);
             }
             if (Input.GetKey(KeyCode.D))
             {
-                moved = true;
                 InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.right);
             }
             if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) ||
@@ -187,6 +188,15 @@ public class RoleControl : MonoBehaviour
                 Input.GetKeyUp(KeyCode.K) || Input.GetKeyUp(KeyCode.L))
             {
                 InputManager.instance.InputCommand(m_Role, CommandType.StopAttack);
+                InputManager.instance.InputCommand(m_Role, CommandType.CastAttack);
+            }
+            // transmission
+            if (Input.GetKey(KeyCode.H))
+            {
+                if (m_Role.m_IsInDisForTransmission)
+                {
+                    m_Role.m_IsReadyForTransmission = true;
+                }
             }
         }
         // player 2
@@ -195,22 +205,18 @@ public class RoleControl : MonoBehaviour
             // move
             if (Input.GetKey(KeyCode.UpArrow))
             {
-                moved = true;
                 InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.up);
             }
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                moved = true;
                 InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.left);
             }
             if (Input.GetKey(KeyCode.DownArrow))
             {
-                moved = true;
                 InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.down);
             }
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                moved = true;
                 InputManager.instance.InputCommand(m_Role, CommandType.Move, Vector2.right);
             }
             if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.LeftArrow) ||
@@ -239,6 +245,15 @@ public class RoleControl : MonoBehaviour
                 Input.GetKeyUp(KeyCode.Keypad5) || Input.GetKeyUp(KeyCode.Keypad6))
             {
                 InputManager.instance.InputCommand(m_Role, CommandType.StopAttack);
+                InputManager.instance.InputCommand(m_Role, CommandType.CastAttack);
+            }
+            // transmission
+            if (Input.GetKey(KeyCode.Keypad0))
+            {
+                if (m_Role.m_IsInDisForTransmission)
+                {
+                    m_Role.m_IsReadyForTransmission = true;
+                }
             }
         }
 

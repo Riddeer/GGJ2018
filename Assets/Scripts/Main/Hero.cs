@@ -10,20 +10,38 @@ using Spine.Unity;
 using System.Linq;
 using DynamicLight2D;
 
+public enum TransmissionType
+{
+    NULL = -1,
+    Fat = 0,
+    Thin = 1,
+
+    SIZE
+};
+
 public class Hero : HeroModel
 {
+    public TransmissionType m_CurTransType = TransmissionType.Fat;
     public Slider m_ChargeSlider;
     public Slider m_BulletSlider;
     public GameObject m_CurTarMark;
     public GameObject[] m_WeaponsToCreate;
+    [HideInInspector]
+    public bool m_IsReadyForTransmission = false;
+    [HideInInspector]
+    public bool m_IsInDisForTransmission = false;
 
     private SpriteRenderer m_SkillPointing_CastDis;
     private Slider m_ShieldSlider;
+    private Hero m_OtherHero;
+    private const float m_MaxDisForTransmission = 5f;
+    private const float m_TransmissionDis = 3f;
 
     protected override void Awake()
     {
         base.Awake();
-        
+        m_IsReadyForTransmission = false;
+        m_IsInDisForTransmission = false;
     }
 
     protected override void Start()
@@ -38,8 +56,17 @@ public class Hero : HeroModel
 
         m_CurTarMark.SetActive(false);
 
+        foreach (Hero one in Global.instance.m_Hero_All)
+        {
+            if (one != this)
+            {
+                m_OtherHero = one;
+                break;
+            }
+        }
         // test 
         // m_Invincible = true;
+        this.UpdateTransmissionType();
     }
     protected override void Update()
     {
@@ -66,9 +93,52 @@ public class Hero : HeroModel
 
         this.UpdateChargeShow();
         this.UpdateBulletShow();
+        this.UpdateCheckTransmission();
+
         base.Update();
 
     }
+    private void UpdateCheckTransmission()
+    {
+        float dis = Vector2.Distance(this.GetFootPos(), m_OtherHero.GetFootPos());
+        if (dis <= m_MaxDisForTransmission)
+        {
+            // show tip
+            // Debug.Log("Distance is right now!!!");
+
+            m_IsInDisForTransmission = true;
+        }
+        else
+        {
+            m_IsReadyForTransmission = false;
+            m_IsInDisForTransmission = false;
+        }
+
+        if (m_IsReadyForTransmission)
+        {
+            if (m_OtherHero.m_IsReadyForTransmission)
+            {
+                this.Transmission();
+            }
+        }
+    }
+
+    private void Transmission()
+    {
+        m_CurStatus = RoleStatus.Transmission;
+        m_AniMng.Transmission();
+
+        // set face 
+        bool otherIsRight = m_OtherHero.GetFootPos().x > this.GetFootPos().x;
+        this.SetFlipX(!otherIsRight);
+
+        // set position
+        if (m_CurTransType == TransmissionType.Thin)
+        {
+
+        }
+    }
+
     public override void CreateWeapons()
     {
         foreach (GameObject one in m_WeaponsToCreate)
@@ -193,7 +263,14 @@ public class Hero : HeroModel
         m_CurTarMark.transform.position = tar.GetMidPos();
 
     }
+    public override void Attack()
+    {
+        if (m_CurTransType == TransmissionType.Thin) return;
 
+        if (m_CurStatus == RoleStatus.Transmission) return;
+
+        base.Attack();
+    }
 
     public override void Die()
     {
@@ -270,5 +347,51 @@ public class Hero : HeroModel
         if (m_ShieldSlider != null) m_ShieldSlider.value = val_Shield;
     }
 
+    public override void HandleComplete(TrackEntry trackEntry)
+    {
+        base.HandleComplete(trackEntry);
+        if (trackEntry.ToString() == m_AniMng.m_AniName_TransMission)
+        {
+            this.SwitchTransmissionType();
+
+            m_CurStatus = RoleStatus.Idle;
+            this.Idle();
+        }
+    }
+
+    public override void Idle()
+    {
+        if (m_CurStatus == RoleStatus.Transmission) return;
+
+        base.Idle();
+    }
+    private void SwitchTransmissionType()
+    {
+        m_CurTransType = m_CurTransType == TransmissionType.Fat ?
+            TransmissionType.Thin : TransmissionType.Fat;
+
+        this.UpdateTransmissionType();
+    }
+
+    private void UpdateTransmissionType()
+    {
+        switch (m_CurTransType)
+        {
+            case TransmissionType.Fat:
+                {
+                    m_MoveVec = 1f;
+                }
+                break;
+
+            case TransmissionType.Thin:
+                {
+                    m_MoveVec = 3f;
+                }
+                break;
+
+            default:
+                break;
+        }
+    }
 
 }
