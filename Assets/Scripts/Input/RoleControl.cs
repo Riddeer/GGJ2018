@@ -92,10 +92,7 @@ public class RoleControl : MonoBehaviour
         if (XCI.GetButton(XboxButton.A, m_Ctrler))
         {
             // InputManager.instance.InputCommand(m_Role, CommandType.Attack, Vector2.down);
-            if (m_Role.m_IsInDisForTransmission)
-            {
-                m_Role.m_IsReadyForTransmission = true;
-            }
+            m_Role.EnsureTransmission();
         }
         // if (XCI.GetButton(XboxButton.B, m_Ctrler))
         // {
@@ -193,10 +190,7 @@ public class RoleControl : MonoBehaviour
             // transmission
             if (Input.GetKey(KeyCode.H))
             {
-                if (m_Role.m_IsInDisForTransmission)
-                {
-                    m_Role.m_IsReadyForTransmission = true;
-                }
+                m_Role.EnsureTransmission();
             }
         }
         // player 2
@@ -250,10 +244,7 @@ public class RoleControl : MonoBehaviour
             // transmission
             if (Input.GetKey(KeyCode.Keypad0))
             {
-                if (m_Role.m_IsInDisForTransmission)
-                {
-                    m_Role.m_IsReadyForTransmission = true;
-                }
+                m_Role.EnsureTransmission();
             }
         }
 
