@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -819100962, guid: 1575c1ccf5c9d9b4880372d854f9fcd4, type: 3}
+  m_Name: BehaviorDesignerGlobalVariables
+  m_EditorClassIdentifier: 
+  mVariableData:
+    variableStartIndex: 00000000
+    JSONSerialization: 
+    fieldSerializationData:
+      typeName: []
+      fieldNameHash: 7ae1b0d0ad905f9c72aeef989b867d17fda35119
+      startIndex: 0000000001000000020000000300000004000000
+      dataPosition: 00000000230000002e0000002f00000030000000
+      unityObjects: []
+      byteData: 4265686176696f7244657369676e65722e52756e74696d652e536861726564426f6f6c706c61796572416c697665010101
+      byteDataArray: 
+  mVersion: 1.5.9
