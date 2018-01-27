@@ -84,9 +84,18 @@ public class Weapon : MonoBehaviour
         return m_CurBullet >= val;
     }
 
-    public void SetFullBullet()
+    public void SetFullBullet(ref int roleBullet)
     {
-        m_CurBullet = m_MaxBullet;
+        if (roleBullet >= m_MaxBullet)
+        {
+            roleBullet -= m_MaxBullet;
+            m_CurBullet = m_MaxBullet;
+        }
+        else
+        {
+            m_CurBullet = roleBullet;
+            roleBullet = 0;
+        }
     }
 
     public float GetBulletPercent()

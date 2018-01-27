@@ -53,6 +53,7 @@ public class Hero : HeroModel
         m_PrepareChangeParticle.SetActive(false);
         m_AniMng.SwitchWeaponTextrue(m_CurWeapon.m_SpineSkinName,
         m_CurWeapon.m_WeaponID, m_HeroID);
+        if (m_ChargeSlider) m_ChargeSlider.gameObject.SetActive(false);
 
         m_CurTarMark.SetActive(false);
 
@@ -164,6 +165,7 @@ public class Hero : HeroModel
 
         // set cur weapon
         m_CurWeapon = m_CreatedWeapons[0];
+        // m_CurWeapon.SetFullBullet(ref m_AllBullet);
         this.UpdateFirstAtkWaiteTime();
         // init weapon ui text
         // InputManager.instance.InitWeaponUIText();
@@ -302,7 +304,9 @@ public class Hero : HeroModel
     protected override IEnumerator IE_ReloadWeapon()
     {
         m_IsReloading = true;
-        m_CurWeapon.SetFullBullet();
+        float endVal = m_AllBullet >= m_CurWeapon.m_MaxBullet? 1f: 
+            (float)m_AllBullet / (float)m_CurWeapon.m_MaxBullet;
+        m_CurWeapon.SetFullBullet(ref m_AllBullet);
 
         if (m_BulletSlider != null)
         {
@@ -312,7 +316,7 @@ public class Hero : HeroModel
             {
                 fillImg.color = Color.red;
             }
-            m_BulletSlider.DOValue(1f, m_CurWeapon.m_ReloadTime)
+            m_BulletSlider.DOValue(endVal, m_CurWeapon.m_ReloadTime)
             .SetEase(Ease.Linear)
             .OnComplete(delegate ()
             {
