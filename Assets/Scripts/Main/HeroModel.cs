@@ -35,6 +35,8 @@ public class HeroModel : RoleBase
     public float m_ShieldRestoreInterval = 1f;
     public float m_ShieldRestoreBreak = 3f;
     public HeroID m_HeroID;
+    public int m_AllBullet = 10;
+
     private float m_NextShootTime;
     private int m_LeftNorAtkTimes = 0;
     readonly int m_MAXNumOfLeftNorAtkTimes = 1;
@@ -54,7 +56,7 @@ public class HeroModel : RoleBase
     protected OperateMode m_OpaMode = OperateMode.NULL;
     private float m_FirstAtkWaiteTime = 0;
     private IEnumerator m_IE_ShortestInterAtk = null;
-  
+
 
     protected override void Awake()
     {
@@ -77,7 +79,7 @@ public class HeroModel : RoleBase
         base.Start();
         m_AniMng.StartSetWink();
         m_AniMng.SetSkin(m_Skin.ToString());
-		// m_Shield.SetActive(true);
+        // m_Shield.SetActive(true);
 
     }
 
@@ -86,7 +88,7 @@ public class HeroModel : RoleBase
 
     public virtual void CreateWeapons()
     {
-       
+
     }
 
     public void UpdateFirstAtkWaiteTime(bool toZero = false)
@@ -114,7 +116,7 @@ public class HeroModel : RoleBase
     {
         this.UpdateFlip();
         m_AniMng.Aim(this.GetCurFaceVec());
-        
+
 
     }
     protected override string Get_Atk_01_AudioName()
@@ -160,7 +162,7 @@ public class HeroModel : RoleBase
     protected virtual IEnumerator IE_ReloadWeapon()
     {
         m_IsReloading = true;
-        m_CurWeapon.SetFullBullet();
+        m_CurWeapon.SetFullBullet(ref m_AllBullet);
 
         yield return new WaitForSeconds(m_CurWeapon.m_ReloadTime);
 
@@ -197,7 +199,11 @@ public class HeroModel : RoleBase
 
                         // consume bullet
                         if (!m_CurWeapon.ConsumeBullet(
-                            m_CurWeapon.m_ConsumePerHit)) return;
+                            m_CurWeapon.m_ConsumePerHit))
+                        {
+                            this.Talk("NO AMMO", 1f);
+                            return;
+                        }
 
                         // to make sure the atk is continuse
                         if (m_IE_ShortestInterAtk != null)//hero
@@ -525,7 +531,7 @@ public class HeroModel : RoleBase
 
         if (m_CurShieldVal > 0)
         {
-			// m_Shield.SetActive(true);
+            // m_Shield.SetActive(true);
             if (m_CurShieldVal >= val)
             {
                 m_CurShieldVal -= val;
@@ -535,7 +541,7 @@ public class HeroModel : RoleBase
             {
                 val -= m_CurShieldVal;
                 m_CurShieldVal = 0;
-				// m_Shield.SetActive(false);
+                // m_Shield.SetActive(false);
             }
         }
 

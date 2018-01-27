@@ -123,7 +123,7 @@ public abstract class RoleBase : MonoBehaviour
         m_CurVec_Move = Vector2.right;
         m_NextDustPlayTime = 0;
         m_IE_MoveTo = null;
-
+        if (m_TalkText) m_TalkText.text = "";
 
         // create dic
         this.CreateDmgDic();
