@@ -53,7 +53,11 @@ public class EnemyManager : MonoBehaviour
             this.CreateOneEnemy();
         }
     }
-    public void CreateEnemyWave(int num, float anchorX, float anchorY,float mixArea, float maxArea)
+    public void CreateEnemyWave()
+    {
+        CreateEnemyWave(3, 0, 0, 8, 12);
+    }
+    private void CreateEnemyWave(int num, float anchorX, float anchorY, float mixArea, float maxArea)
     {
         for (int i = 0; i < num; i++)
         {
@@ -78,7 +82,7 @@ public class EnemyManager : MonoBehaviour
             {
                 temY = -Random.Range((anchorY + mixArea), (anchorY + maxArea));
             }
-            Vector3 testPos = new Vector3(temX,temY);
+            Vector3 testPos = new Vector3(temX, temY);
             GameObject oneE = m_EnemyPrefabs[Random.Range(0, m_EnemyPrefabs.Length)];
             GameObject eGO = Instantiate(
             Resources.Load("Enemy/" + oneE.name),
