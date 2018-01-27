@@ -26,6 +26,8 @@ public class Hero : HeroModel
     public Slider m_BulletSlider;
     public GameObject m_CurTarMark;
     public GameObject[] m_WeaponsToCreate;
+    public float m_SuckSpeed = 10f;
+
     [HideInInspector]
     public bool m_IsReadyForTransmission = false;
     [HideInInspector]
@@ -36,12 +38,16 @@ public class Hero : HeroModel
     private Hero m_OtherHero;
     private const float m_MaxDisForTransmission = 5f;
     private const float m_TransmissionDis = 3f;
+    private IEnumerator m_IE_SuckPool;
+    private WaterPool m_CurSuckPool;
 
     protected override void Awake()
     {
         base.Awake();
         m_IsReadyForTransmission = false;
         m_IsInDisForTransmission = false;
+        m_IE_SuckPool = null;
+        m_CurSuckPool = null;
     }
 
     protected override void Start()
@@ -53,6 +59,7 @@ public class Hero : HeroModel
         m_PrepareChangeParticle.SetActive(false);
         m_AniMng.SwitchWeaponTextrue(m_CurWeapon.m_SpineSkinName,
         m_CurWeapon.m_WeaponID, m_HeroID);
+        if (m_ChargeSlider) m_ChargeSlider.gameObject.SetActive(false);
 
         m_CurTarMark.SetActive(false);
 
@@ -130,6 +137,14 @@ public class Hero : HeroModel
         m_IsReadyForTransmission = false;
         m_IsInDisForTransmission = false;
 
+        // stop suck
+        if (m_IE_SuckPool != null)
+        {
+            StopCoroutine(m_IE_SuckPool);
+            m_IE_SuckPool = null;
+            m_CurSuckPool = null;
+        }
+
         m_CurStatus = RoleStatus.Transmission;
         m_AniMng.Transmission();
 
@@ -164,6 +179,7 @@ public class Hero : HeroModel
 
         // set cur weapon
         m_CurWeapon = m_CreatedWeapons[0];
+        // m_CurWeapon.SetFullBullet(ref m_AllBullet);
         this.UpdateFirstAtkWaiteTime();
         // init weapon ui text
         // InputManager.instance.InitWeaponUIText();
@@ -302,7 +318,9 @@ public class Hero : HeroModel
     protected override IEnumerator IE_ReloadWeapon()
     {
         m_IsReloading = true;
-        m_CurWeapon.SetFullBullet();
+        float endVal = m_AllBullet >= m_CurWeapon.m_MaxBullet ? 1f :
+            (float)m_AllBullet / (float)m_CurWeapon.m_MaxBullet;
+        m_CurWeapon.SetFullBullet(ref m_AllBullet);
 
         if (m_BulletSlider != null)
         {
@@ -312,7 +330,7 @@ public class Hero : HeroModel
             {
                 fillImg.color = Color.red;
             }
-            m_BulletSlider.DOValue(1f, m_CurWeapon.m_ReloadTime)
+            m_BulletSlider.DOValue(endVal, m_CurWeapon.m_ReloadTime)
             .SetEase(Ease.Linear)
             .OnComplete(delegate ()
             {
@@ -401,6 +419,66 @@ public class Hero : HeroModel
 
             default:
                 break;
+        }
+    }
+
+    protected override void OnTrigger(Collider2D col)
+    {
+        base.OnTrigger(col);
+
+        WaterPool pool = col.gameObject.GetComponent<WaterPool>();
+        if (m_CurTransType == TransmissionType.Thin &&
+        m_CurStatus != RoleStatus.Transmission && pool)
+        {
+            if (pool != m_CurSuckPool)
+            {
+                if (m_IE_SuckPool != null)
+                {
+                    StopCoroutine(m_IE_SuckPool);
+                    m_IE_SuckPool = null;
+                    m_CurSuckPool = null;
+                }
+                m_IE_SuckPool = IE_SuckPool(pool);
+                StartCoroutine(m_IE_SuckPool);
+            }
+        }
+    }
+    protected override void OnTrigger_Exit(Collider2D col)
+    {
+        base.OnTrigger_Exit(col);
+
+        WaterPool pool = col.gameObject.GetComponent<WaterPool>();
+        if (m_CurTransType == TransmissionType.Thin &&
+        m_CurStatus != RoleStatus.Transmission && pool)
+        {
+            if (pool == m_CurSuckPool)
+            {
+                if (m_IE_SuckPool != null)
+                {
+                    StopCoroutine(m_IE_SuckPool);
+                    m_IE_SuckPool = null;
+                    m_CurSuckPool = null;
+                }
+            }
+        }
+    }
+    private IEnumerator IE_SuckPool(WaterPool pool)
+    {
+        m_CurSuckPool = pool;
+
+        while (true)
+        {
+            if (m_CurSuckPool)
+            {
+                m_CurSuckPool.BeSucked(this);
+            }
+            else
+            {
+                StopCoroutine(m_IE_SuckPool);
+                m_IE_SuckPool = null;
+            }
+
+            yield return null;
         }
     }
 
