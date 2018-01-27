@@ -54,7 +54,7 @@ public class EnemyManager : MonoBehaviour
     }
     public void CreateEnemyWave(int num ,float anchorX,float mixArea,float maxArea)
     {
-        
+        int num = 5;
     }
     private void SetDataByCrossSceneDataMng()
     {
