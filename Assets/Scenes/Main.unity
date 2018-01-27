@@ -17253,11 +17253,14 @@ MonoBehaviour:
   m_ShieldRestoreInterval: 3
   m_ShieldRestoreBreak: 3
   m_HeroID: 0
+  m_CurTransType: 1
   m_ChargeSlider: {fileID: 2026492161}
   m_BulletSlider: {fileID: 2064573324}
   m_CurTarMark: {fileID: 445392706}
   m_WeaponsToCreate:
   - {fileID: 1977267807311106, guid: 76342e39a2b3d49288e9439de593c4bb, type: 2}
+  m_IsReadyForTransmission: 0
+  m_IsInDisForTransmission: 0
 --- !u!114 &1023754361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17351,6 +17354,7 @@ MonoBehaviour:
   m_AniName_Move: Move_01
   m_AniName_Idle: Idle_01
   m_AniName_Die: Death_01
+  m_AniName_TransMission: Transmission
   m_AtkAimType: 1
   m_NormalRotate:
   - {fileID: 1693556461}
@@ -19049,6 +19053,7 @@ MonoBehaviour:
   m_AniName_Move: Move_01
   m_AniName_Idle: Idle_01
   m_AniName_Die: Death_01
+  m_AniName_TransMission: Transmission
   m_AtkAimType: 1
   m_NormalRotate:
   - {fileID: 1327084725}
@@ -19111,11 +19116,14 @@ MonoBehaviour:
   m_ShieldRestoreInterval: 3
   m_ShieldRestoreBreak: 3
   m_HeroID: 0
+  m_CurTransType: 0
   m_ChargeSlider: {fileID: 1962065727}
   m_BulletSlider: {fileID: 103851578}
   m_CurTarMark: {fileID: 445392706}
   m_WeaponsToCreate:
   - {fileID: 1977267807311106, guid: 76342e39a2b3d49288e9439de593c4bb, type: 2}
+  m_IsReadyForTransmission: 0
+  m_IsInDisForTransmission: 0
 --- !u!114 &1180683677
 MonoBehaviour:
   m_ObjectHideFlags: 0

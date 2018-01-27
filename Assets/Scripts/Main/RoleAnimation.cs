@@ -26,6 +26,8 @@ public class RoleAnimation : MonoBehaviour
     public string m_AniName_Idle = "Idle_01";
     [SpineAnimation(dataField: "m_SkeAnimation")]
     public string m_AniName_Die = "Death_01";
+    [SpineAnimation(dataField: "m_SkeAnimation")]
+    public string m_AniName_TransMission = "Transmission";
     public AttackAimType m_AtkAimType = AttackAimType.Aim;
     public Transform[] m_NormalRotate;
     public Transform[] m_LessRotate;
@@ -90,6 +92,10 @@ public class RoleAnimation : MonoBehaviour
         m_CurAtkName = aniName;
 
         this.RunAnimation(aniName, false, 1, true);
+    }
+    public void Transmission()
+    {
+        this.RunAnimation(m_AniName_TransMission, false, 0, false);
     }
     // this attack is used by hero to switch weapon
     public void SwitchWeaponTextrue(string skinName, WeaponID weaponID, HeroID heroID)

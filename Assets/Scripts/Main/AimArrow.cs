@@ -34,13 +34,15 @@ public class AimArrow : MonoBehaviour
 
     private void SetMySelfActiveFalse(Hero player)
     {
-        if(player != m_OpaHero) return;
+        if (player != m_OpaHero) return;
         gameObject.SetActive(false);
     }
     private void UpdateInteChoisePointing(Hero player)
     {
-        if(player != m_OpaHero) return;
+        if (player != m_OpaHero) return;
         if (m_OpaHero.m_CurWeapon.m_AimType == AimArrowType.NULL) return;
+        if (m_OpaHero.m_CurTransType == TransmissionType.Thin) return;
+        if (m_OpaHero.m_CurStatus == RoleStatus.Transmission) return;
         gameObject.SetActive(true);
         // m_AimArrow.SetActive(false);
         gameObject.transform.position = m_OpaHero.GetMidPos();
