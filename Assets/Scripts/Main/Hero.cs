@@ -100,6 +100,8 @@ public class Hero : HeroModel
     }
     private void UpdateCheckTransmission()
     {
+        if (m_CurStatus == RoleStatus.Transmission) return;
+
         float dis = Vector2.Distance(this.GetFootPos(), m_OtherHero.GetFootPos());
         if (dis <= m_MaxDisForTransmission)
         {
@@ -125,6 +127,9 @@ public class Hero : HeroModel
 
     private void Transmission()
     {
+        m_IsReadyForTransmission = false;
+        m_IsInDisForTransmission = false;
+
         m_CurStatus = RoleStatus.Transmission;
         m_AniMng.Transmission();
 
@@ -136,7 +141,7 @@ public class Hero : HeroModel
         if (m_CurTransType == TransmissionType.Thin)
         {
             transform.position = new Vector3(
-                m_OtherHero.GetFootPos().x + 
+                m_OtherHero.GetFootPos().x +
                     m_TransmissionDis * (otherIsRight ? -1f : 1f),
                 m_OtherHero.GetFootPos().y,
                 0
