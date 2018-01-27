@@ -26,6 +26,8 @@ public class Hero : HeroModel
     public Slider m_BulletSlider;
     public GameObject m_CurTarMark;
     public GameObject[] m_WeaponsToCreate;
+    public float m_SuckSpeed = 10f;
+
     [HideInInspector]
     public bool m_IsReadyForTransmission = false;
     [HideInInspector]
@@ -407,5 +409,14 @@ public class Hero : HeroModel
                 break;
         }
     }
+
+    protected override void OnTrigger(Collider2D col)
+    {
+        base.OnTrigger(col);
+
+        Pool pool = col.GetComponent<Pool>();
+        if (pool) pool.BeSucked(this);
+    }
+
 
 }
