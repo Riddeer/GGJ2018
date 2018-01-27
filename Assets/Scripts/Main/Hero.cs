@@ -28,9 +28,9 @@ public class Hero : HeroModel
     public GameObject[] m_WeaponsToCreate;
     public float m_SuckSpeed = 10f;
 
-    [HideInInspector]
+    // [HideInInspector]
     public bool m_IsReadyForTransmission = false;
-    [HideInInspector]
+    // [HideInInspector]
     public bool m_IsInDisForTransmission = false;
 
     private SpriteRenderer m_SkillPointing_CastDis;
@@ -123,17 +123,31 @@ public class Hero : HeroModel
             m_IsInDisForTransmission = false;
         }
 
-        if (m_IsReadyForTransmission)
+        // if (m_IsReadyForTransmission)
+        // {
+        //     if (m_OtherHero.m_IsReadyForTransmission)
+        //     {
+        //         this.Transmission();
+        //     }
+        // }
+    }
+
+    public void EnsureTransmission()
+    {
+        if (!m_IsInDisForTransmission) return;
+
+        m_IsReadyForTransmission = true;
+        if (m_OtherHero.m_IsReadyForTransmission)
         {
-            if (m_OtherHero.m_IsReadyForTransmission)
-            {
-                this.Transmission();
-            }
+            this.Transmission();
+            m_OtherHero.Transmission();
         }
     }
 
-    private void Transmission()
+    public void Transmission()
     {
+        if (m_CurStatus == RoleStatus.Transmission) return;
+
         m_IsReadyForTransmission = false;
         m_IsInDisForTransmission = false;
 
@@ -150,7 +164,8 @@ public class Hero : HeroModel
 
         // set face 
         bool otherIsRight = m_OtherHero.GetFootPos().x > this.GetFootPos().x;
-        this.SetFlipX(!otherIsRight);
+        // this.SetFlipX(!otherIsRight);
+        this.SetCurVec_Move( otherIsRight ? Vector2.right: Vector2.left);
 
         // set position
         if (m_CurTransType == TransmissionType.Thin)
@@ -380,10 +395,14 @@ public class Hero : HeroModel
         base.HandleComplete(trackEntry);
         if (trackEntry.ToString() == m_AniMng.m_AniName_TransMission)
         {
-            this.SwitchTransmissionType();
+            if (m_CurStatus == RoleStatus.Transmission)
+            {
+                this.SwitchTransmissionType();
 
-            m_CurStatus = RoleStatus.Idle;
-            this.Idle();
+                m_CurStatus = RoleStatus.Idle;
+                this.Idle();
+            }
+
         }
     }
 
@@ -420,6 +439,8 @@ public class Hero : HeroModel
             default:
                 break;
         }
+
+        m_AniMng.SetCurTransmissionRes(m_CurTransType);
     }
 
     protected override void OnTrigger(Collider2D col)
@@ -482,4 +503,16 @@ public class Hero : HeroModel
         }
     }
 
+    public override void SetFlipX(bool flipX)
+    {
+        if (m_Flip == flipX) return;
+        m_Flip = flipX;
+
+        float flipVal = flipX ? -1f : 1f;
+        this.GetRes().SetLocalScale_X(
+            Mathf.Abs(this.GetRes().localScale.x) * flipVal);
+        Transform child1 = transform.GetChild(1);
+        child1.SetLocalScale_X(
+            Mathf.Abs(child1.localScale.x) * flipVal);
+    }
 }
