@@ -28,6 +28,7 @@
 
     // Spine event name
     public const string SpineEventName_Attack = "Attack";
+    public const string SpineEventName_attack = "attack";
     public const string SpineEventName_Step = "Step";
     public const string SpineEventName_Run = "Run";
     public const string SpineEventName_Death = "Death";

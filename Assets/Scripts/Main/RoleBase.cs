@@ -908,7 +908,8 @@ public abstract class RoleBase : MonoBehaviour
     {
         // if (m_PhotonView != null && !m_PhotonView.isMine) return;
 
-        if (e.Data.Name == Constants.SpineEventName_Attack)
+        if (e.Data.Name == Constants.SpineEventName_Attack ||
+        e.Data.Name == Constants.SpineEventName_attack)
         {
             this.AtkAnimationEvent();
         }
@@ -938,7 +939,6 @@ public abstract class RoleBase : MonoBehaviour
     {
         if (trackEntry.ToString() == m_AniMng.m_AniName_Die)
         {
-
             this.RemoveSelf();
         }
 

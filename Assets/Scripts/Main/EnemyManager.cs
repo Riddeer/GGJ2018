@@ -141,7 +141,7 @@ public class EnemyManager : MonoBehaviour
     {
         // Debug.Log(enemy.name + " is been destroyed");
         m_Enemies.Remove(enemy);
-        GameObject.Destroy(enemy.gameObject);
+        GameObject.Destroy(enemy.gameObject, 2f);
     }
 
     public void InitEnemyStatus(RoleStatus status)

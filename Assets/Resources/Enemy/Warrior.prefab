@@ -309,10 +309,10 @@ MonoBehaviour:
   m_BoneFollower: {fileID: 0}
   m_SkeAnimation_0: {fileID: 114173810127753956}
   m_SkeAnimation_1: {fileID: 0}
-  m_AniName_Move: move
-  m_AniName_Idle: idle
+  m_AniName_Move: Move
+  m_AniName_Idle: Idle
   m_AniName_Die: 
-  m_AniName_TransMission: Transmission
+  m_AniName_TransMission: Idle
   m_AtkAimType: 1
   m_NormalRotate: []
   m_LessRotate: []
