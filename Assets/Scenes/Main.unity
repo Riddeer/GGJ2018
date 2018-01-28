@@ -574,7 +574,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 34623701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 666.6045, y: -375, z: 0}
+  m_LocalPosition: {x: 666.0448, y: -375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 813923635}
@@ -934,7 +934,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 80874118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 666.6045, y: 375, z: 0}
+  m_LocalPosition: {x: 666.0448, y: 375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 832868233}
@@ -11210,7 +11210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Theme
-    clip: {fileID: 8300000, guid: 480a89594d69b499982543b5e4b23a42, type: 3}
+    clip: {fileID: 8300000, guid: 8b985a95c9d5f414192a35a1541552ac, type: 3}
     volume: 0.2
     pitch: 1
     loop: 1
@@ -31713,7 +31713,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1292976839}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -666.6045, y: -375, z: 0}
+  m_LocalPosition: {x: -666.0448, y: -375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1365735644}
@@ -32916,8 +32916,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1365735640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 595.5, y: 335, z: 0}
-  m_LocalScale: {x: 0.8933333, y: 0.8933333, z: 0.8933333}
+  m_LocalPosition: {x: 416.5, y: 234.5, z: 0}
+  m_LocalScale: {x: 0.6253333, y: 0.6253333, z: 0.6253333}
   m_Children:
   - {fileID: 34623702}
   - {fileID: 1631526372}
@@ -46647,7 +46647,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1631526371}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -666.6045, y: 375, z: 0}
+  m_LocalPosition: {x: -666.0448, y: 375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1568914418}
