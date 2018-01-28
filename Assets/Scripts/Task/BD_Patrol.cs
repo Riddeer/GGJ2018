@@ -29,15 +29,17 @@ public class BD_Patrol : Action
     private float minY;
     private float maxY;
     private Vector3 tempVector3 = Vector3.zero;
+    private BehaviorTree m_BehaviorTree;
 
 
     public override void OnAwake()
     {
-
+        m_BehaviorTree = GetComponent<BehaviorTree>();
 
     }
     public override void OnStart()
     {
+        
         minX = areaX.Value.x;
         maxX = areaX.Value.y;
         minY = areaY.Value.x;
@@ -46,7 +48,7 @@ public class BD_Patrol : Action
         path = new NavMeshPath();
         m_Agent = m_Enemy.m_Agent;
         navAgent_Transform = m_Agent.transform;
-
+        m_BehaviorTree.SetVariableValue("staticPoint",m_Enemy.gameObject.transform.position);
         m_MoveVec = m_Enemy.m_MoveVec;
         if (isMoveAroundStaticPoint)
         {
