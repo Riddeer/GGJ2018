@@ -128,11 +128,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1992993058095538}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.02, y: -7.91, z: 0}
-  m_LocalScale: {x: 1.0641421, y: 1.0641422, z: 1.0641422}
+  m_LocalPosition: {x: -10.96, y: 2.31, z: 0}
+  m_LocalScale: {x: 0.79999995, y: 0.82, z: 1.06414}
   m_Children:
-  - {fileID: 4799142184978780}
   - {fileID: 4791791912669632}
+  - {fileID: 4799142184978780}
   - {fileID: 4118911798677526}
   - {fileID: 4431470759825454}
   - {fileID: 4006465744769554}
@@ -172,11 +172,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1531281260255444}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.03, y: 1.6, z: 0}
-  m_LocalScale: {x: 0.6427174, y: 0.6427174, z: 0.6427174}
+  m_LocalPosition: {x: 0, y: 1.567, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4113215134949518}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4799142184978780
 Transform:
@@ -189,7 +189,7 @@ Transform:
   m_LocalScale: {x: 0.4486984, y: 0.28043625, z: 0.44869846}
   m_Children: []
   m_Father: {fileID: 4113215134949518}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &58194807909622750
 CircleCollider2D:
@@ -218,9 +218,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06, y: 0.74}
+  m_Offset: {x: 0.27, y: 0}
   serializedVersion: 2
-  m_Radius: 0.4
+  m_Radius: 0.53
 --- !u!61 &61157481300001766
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 174b7edb1115b4d10b44dad9100506fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PlanesID: 0
   m_Amplitude: 4.5
   m_UnitDuration: 0.01
   m_LoopTimes: 2
@@ -266,7 +267,7 @@ MonoBehaviour:
   m_ColParticlePos: {fileID: 4118911798677526}
   m_Res: {fileID: 212967929430591294}
   m_AtkedSpSheet:
-  - {fileID: 21300000, guid: e26448b7af725419fa68f3e0da7d8306, type: 3}
+  - {fileID: 21300000, guid: a6c62581164cbea48a6a63d4930679a8, type: 3}
   m_CannotBeDestroy: 1
   m_RebornTime: 5
 --- !u!208 &208242946341637504
@@ -293,6 +294,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -308,6 +310,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -335,6 +338,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
@@ -350,6 +354,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
@@ -358,7 +363,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: e26448b7af725419fa68f3e0da7d8306, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a6c62581164cbea48a6a63d4930679a8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
