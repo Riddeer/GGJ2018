@@ -77,8 +77,8 @@ public class HeroModel : RoleBase
     protected override void Start()
     {
         base.Start();
-        m_AniMng.StartSetWink();
-        m_AniMng.SetSkin(m_Skin.ToString());
+        // m_AniMng.StartSetWink();
+        // m_AniMng.SetSkin(m_Skin.ToString());
         // m_Shield.SetActive(true);
 
     }
@@ -144,7 +144,7 @@ public class HeroModel : RoleBase
         float pitch = 0.8f + UnityEngine.Random.Range(-0.3f, 0.3f);
 
         AudioManager.instance.Play(Get_Death_AudioName(), pitch);
-        m_PrepareChangeParticle.SetActive(false);//hero
+        if (m_PrepareChangeParticle) m_PrepareChangeParticle.SetActive(false);//hero
         if (m_AniMng != null)
         {
             m_AniMng.StopWink();
@@ -171,7 +171,7 @@ public class HeroModel : RoleBase
     public override void Attack()
     {
         if (m_IsReloading) return;
-        m_AniMng.AngryFace();
+        // m_AniMng.AngryFace();
         GameObject dmgPrefab = m_CurWeapon.m_Dmg;
 
         switch (m_CurWeapon.m_OpaType)
@@ -180,7 +180,7 @@ public class HeroModel : RoleBase
                 {
                     if (m_FirstAtkWaiteTime > 0)//hero
                     {
-                        m_PrepareChangeParticle.SetActive(true);//hero
+                        if (m_PrepareChangeParticle) m_PrepareChangeParticle.SetActive(true);//hero
                         m_NextShootTime = Time.time + m_FirstAtkWaiteTime;
                         m_FirstAtkWaiteTime = 0;
                         this.AddLeftNorAtk();
@@ -193,7 +193,7 @@ public class HeroModel : RoleBase
                     }
                     else
                     {
-                        m_PrepareChangeParticle.SetActive(false);//hero
+                        if (m_PrepareChangeParticle) m_PrepareChangeParticle.SetActive(false);//hero
                         // Time.time >= m_NextShootTime
                         m_NextShootTime = Time.time + m_CurWeapon.m_AtkInterval;
 
@@ -260,7 +260,7 @@ public class HeroModel : RoleBase
                 {
                     if (m_DmgEft == null)
                     {
-                        m_PrepareChangeParticle.SetActive(true);//hero
+                        if (m_PrepareChangeParticle) m_PrepareChangeParticle.SetActive(true);//hero
 
                         // consume bullet
                         if (!m_CurWeapon.ConsumeBullet(
@@ -438,7 +438,7 @@ public class HeroModel : RoleBase
         m_ChargStartTime = Time.time;
         m_ChargedValue = 0f;
 
-        m_PrepareChangeParticle.SetActive(false);//hero
+        if (m_PrepareChangeParticle) m_PrepareChangeParticle.SetActive(false);//hero
 
         // resume animation
         this.Idle();

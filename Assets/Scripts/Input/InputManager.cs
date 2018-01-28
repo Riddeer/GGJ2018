@@ -303,7 +303,7 @@ public class InputManager : MonoBehaviour
                 break;
             case CommandType.CastAttack:
                 {
-                    player.m_PrepareChangeParticle.SetActive(false);
+                    if (player.m_PrepareChangeParticle) player.m_PrepareChangeParticle.SetActive(false);
                     // AimArrow.instance.gameObject.SetActive(false);
                     OnButtonLeft(player);
                     if (player.m_CurWeapon.m_AimType == AimArrowType.ArrowNCircle)

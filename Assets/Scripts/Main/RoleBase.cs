@@ -947,6 +947,11 @@ public abstract class RoleBase : MonoBehaviour
             this.AtkAnimationComplete();
         }
 
+        if (trackEntry.ToString() == "Attack_01")
+        {
+            this.AtkAnimationComplete();
+        }
+
     }
 
     protected virtual void AtkAnimationComplete()
