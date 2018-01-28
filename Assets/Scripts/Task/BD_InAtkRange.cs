@@ -18,7 +18,7 @@ public class BD_InAtkRange : Conditional
     {
         if (isRobot == true)
         {
-            atkDistance = m_Enemy.m_CurWeapon.m_AlertRange;
+            atkDistance = m_Enemy.m_AlertRange;
         }
     }
    public override TaskStatus OnUpdate()

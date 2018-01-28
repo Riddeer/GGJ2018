@@ -51,8 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cd2aaa721b1486295faf3230be5d62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MaxEnemyNum: 0
+  m_MaxEnemyNum: 1
   m_EnemyPrefabs:
-  - {fileID: 1260657808287876, guid: 2b7a8db29247546e7bfec014d39c2287, type: 2}
+  - {fileID: 1812814163478522, guid: fcaa5f824bab09542bc96ebb2f8dba79, type: 2}
+  - {fileID: 1372959794148530, guid: 52bee2ed1d9f8b546b108ae772777d63, type: 2}
   m_PosXBounds: {x: -4, y: 4}
   m_PosYBounds: {x: -4, y: 4}
+  m_Enemies: []
