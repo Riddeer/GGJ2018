@@ -11215,6 +11215,12 @@ MonoBehaviour:
     pitch: 1
     loop: 1
     source: {fileID: 0}
+  - name: Weapon_Line_01
+    clip: {fileID: 8300000, guid: d2442338817a64e3898fbadac33881be, type: 3}
+    volume: 0.515
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
 --- !u!4 &542297647
 Transform:
   m_ObjectHideFlags: 0
