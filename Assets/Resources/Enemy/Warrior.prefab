@@ -311,7 +311,7 @@ MonoBehaviour:
   m_SkeAnimation_1: {fileID: 0}
   m_AniName_Move: move
   m_AniName_Idle: idle
-  m_AniName_Die: idle
+  m_AniName_Die: 
   m_AniName_TransMission: Transmission
   m_AtkAimType: 1
   m_NormalRotate: []

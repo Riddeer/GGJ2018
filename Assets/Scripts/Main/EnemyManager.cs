@@ -139,6 +139,7 @@ public class EnemyManager : MonoBehaviour
 
     public void RemoveEnemy(RoleBase enemy)
     {
+        // Debug.Log(enemy.name + " is been destroyed");
         m_Enemies.Remove(enemy);
         GameObject.Destroy(enemy.gameObject);
     }
