@@ -362,10 +362,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BaseType: -1
-  m_MoveVec: 1
+  m_MoveVec: 2.5
   m_MaxHP: 100
-  m_AlertRange: 5
-  m_AtkRange: 1
+  m_AlertRange: 4
+  m_AtkRange: 2
   m_AtkInterval: 0.5
   m_HurtProtectTime: 0.5
   m_BeAtkWidth: 0
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonRenderer: {fileID: 114173810127753956}
-  boneName: atk_pos
+  boneName: Atk_pos
   followZPosition: 1
   followBoneRotation: 1
   followSkeletonFlip: 1
