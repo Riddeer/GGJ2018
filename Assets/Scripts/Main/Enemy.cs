@@ -119,7 +119,7 @@ public class Enemy : RoleBase
             if (this == one) continue;
             if (this.gameObject.layer == one.gameObject.layer) continue;
             if (Vector3.Distance(this.GetFootPos(), one.GetFootPos()) <
-            m_CurWeapon.m_AlertRange
+            m_AlertRange
             && one.m_CurStatus != RoleStatus.Die)
                 enemies.Add(one);
         }
@@ -149,26 +149,26 @@ public class Enemy : RoleBase
 
 
         // 2ddl
-        for (int i = enemies.Count - 1; i >= 0; i--)
-        {
-            RoleBase oneRole = enemies[i];
-            Vector2 dir = (oneRole.GetFootPos() -
-                this.GetFootPos()).normalized;
-            LayerMask tLayer = m_TarLayer & (~(
-                1 << LayerMask.NameToLayer("Plane")
-            ));
-            // check raycast
-            RaycastHit2D hit = Physics2D.Raycast(
-                this.GetMidPos(), dir,
-                m_CurWeapon.m_AlertRange, tLayer);
-            Debug.DrawLine(this.GetMidPos(), this.GetMidPos() + (Vector3)dir * 10, Color.red);
-            if (hit.collider != null)
-            {
-                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Scene"))
-                    enemies.RemoveAt(i);
-            }
-            //   m_TarLayer.dw
-        }
+        // for (int i = enemies.Count - 1; i >= 0; i--)
+        // {
+        //     RoleBase oneRole = enemies[i];
+        //     Vector2 dir = (oneRole.GetFootPos() -
+        //         this.GetFootPos()).normalized;
+        //     LayerMask tLayer = m_TarLayer & (~(
+        //         1 << LayerMask.NameToLayer("Plane")
+        //     ));
+        //     // check raycast
+        //     RaycastHit2D hit = Physics2D.Raycast(
+        //         this.GetMidPos(), dir,
+        //         m_CurWeapon.m_AlertRange, tLayer);
+        //     Debug.DrawLine(this.GetMidPos(), this.GetMidPos() + (Vector3)dir * 10, Color.red);
+        //     if (hit.collider != null)
+        //     {
+        //         if (hit.collider.gameObject.layer == LayerMask.NameToLayer("Scene"))
+        //             enemies.RemoveAt(i);
+        //     }
+        //     //   m_TarLayer.dw
+        // }
 
         return enemies;
 

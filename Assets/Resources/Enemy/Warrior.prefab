@@ -307,7 +307,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BoneFollower: {fileID: 0}
-  m_SkeAnimation: {fileID: 114173810127753956}
+  m_SkeAnimation_0: {fileID: 114173810127753956}
+  m_SkeAnimation_1: {fileID: 0}
   m_AniName_Move: move
   m_AniName_Idle: idle
   m_AniName_Die: idle
@@ -380,7 +381,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   m_Shadow: {fileID: 0}
-  behaviorDesignerPath: BehaviorTree/Warrior
+  behaviorDesignerPath: BehaviorTree/Enemy
   m_TalkText: {fileID: 0}
   m_CurWeapon: {fileID: 0}
   m_Invincible: 0
