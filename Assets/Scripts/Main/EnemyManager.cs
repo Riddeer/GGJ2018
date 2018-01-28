@@ -34,7 +34,7 @@ public class EnemyManager : MonoBehaviour
 
     void Awake()
     {
-        this.SetDataByCrossSceneDataMng();
+        // this.SetDataByCrossSceneDataMng();
     }
 
     void Start()
@@ -48,9 +48,13 @@ public class EnemyManager : MonoBehaviour
 
         if (!Global.instance.m_GameStart) return;
 
-        while (m_Enemies.Count < m_MaxEnemyNum)
+        // while (m_Enemies.Count < m_MaxEnemyNum)
+        // {
+        //     this.CreateOneEnemy();
+        // }
+        if (Input.GetKeyDown(KeyCode.M))
         {
-            this.CreateOneEnemy();
+            CreateEnemyWave();
         }
     }
     public void CreateEnemyWave()
