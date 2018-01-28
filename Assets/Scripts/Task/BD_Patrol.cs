@@ -11,8 +11,10 @@ public class BD_Patrol : Action
     public SharedVector2 areaX;
     public SharedVector2 areaY;
     public bool isAttackPatrol = false;
+    public bool isMoveAroundStaticPoint = false;
     private Vector3 m_Target;
     public SharedFloat m_Distance;
+    public SharedVector3 m_TargetStaticPoint;
     private NavMeshAgent m_Agent;
     private NavMeshPath path;
     private Vector3[] paths;
@@ -46,7 +48,12 @@ public class BD_Patrol : Action
         navAgent_Transform = m_Agent.transform;
 
         m_MoveVec = m_Enemy.m_MoveVec;
-        if (isAttackPatrol)
+        if (isMoveAroundStaticPoint)
+        {
+            tempVector3.x = Random.Range(minX + m_TargetStaticPoint.Value.x, maxX + m_TargetStaticPoint.Value.x);
+            tempVector3.y = Random.Range(minY + m_TargetStaticPoint.Value.y, maxY + m_TargetStaticPoint.Value.y);
+        }
+        else if (isAttackPatrol)
         {
             tempVector3.x = Random.Range(minX + transform.position.x, maxX + transform.position.x);
             tempVector3.y = Random.Range(minY + transform.position.y, maxY + transform.position.y);
@@ -75,17 +82,22 @@ public class BD_Patrol : Action
         }
         else
         {
-            if (isAttackPatrol)
-        {
-            tempVector3.x = Random.Range(minX + transform.position.x, maxX + transform.position.x);
-            tempVector3.y = Random.Range(minY + transform.position.y, maxY + transform.position.y);
-        }
-        else
-        {
-            tempVector3.x = Random.Range(minX, maxX);
-            tempVector3.y = Random.Range(minY, maxY);
-        }
-            
+            if (isMoveAroundStaticPoint)
+            {
+                tempVector3.x = Random.Range(minX + m_TargetStaticPoint.Value.x, maxX + m_TargetStaticPoint.Value.x);
+                tempVector3.y = Random.Range(minY + m_TargetStaticPoint.Value.y, maxY + m_TargetStaticPoint.Value.y);
+            }
+            else if (isAttackPatrol)
+            {
+                tempVector3.x = Random.Range(minX + transform.position.x, maxX + transform.position.x);
+                tempVector3.y = Random.Range(minY + transform.position.y, maxY + transform.position.y);
+            }
+            else
+            {
+                tempVector3.x = Random.Range(minX, maxX);
+                tempVector3.y = Random.Range(minY, maxY);
+            }
+
 
             m_Target = tempVector3;
 
