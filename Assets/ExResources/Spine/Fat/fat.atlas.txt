@@ -7,69 +7,69 @@ repeat: none
 Eye Boring
   rotate: false
   xy: 2, 63
-  size: 49, 54
-  orig: 49, 54
+  size: 48, 54
+  orig: 48, 54
   offset: 0, 0
   index: -1
 Eye Closed
   rotate: false
-  xy: 136, 191
-  size: 49, 54
-  orig: 49, 54
+  xy: 137, 191
+  size: 48, 54
+  orig: 48, 54
   offset: 0, 0
   index: -1
 Eye Death
   rotate: false
   xy: 2, 7
-  size: 49, 54
-  orig: 49, 54
+  size: 48, 54
+  orig: 48, 54
   offset: 0, 0
   index: -1
 Eye Open
   rotate: false
-  xy: 53, 63
-  size: 49, 54
-  orig: 49, 54
+  xy: 52, 63
+  size: 48, 54
+  orig: 48, 54
   offset: 0, 0
   index: -1
 Head
   rotate: false
   xy: 2, 119
-  size: 132, 126
-  orig: 132, 126
+  size: 133, 126
+  orig: 133, 126
   offset: 0, 0
   index: -1
 Left Back Leg
   rotate: true
-  xy: 187, 218
-  size: 27, 65
-  orig: 27, 65
+  xy: 187, 219
+  size: 26, 65
+  orig: 26, 65
   offset: 0, 0
   index: -1
 Left Front Leg
   rotate: true
-  xy: 187, 197
+  xy: 187, 198
   size: 19, 65
   orig: 19, 65
   offset: 0, 0
   index: -1
 Mouth
   rotate: false
-  xy: 136, 137
-  size: 46, 52
-  orig: 46, 52
+  xy: 137, 137
+  size: 47, 52
+  orig: 47, 52
   offset: 0, 0
   index: -1
 Right Back Leg
   rotate: false
-  xy: 80, 2
-  size: 18, 59
-  orig: 18, 59
+  xy: 79, 2
+  size: 19, 59
+  orig: 19, 59
   offset: 0, 0
   index: -1
 Right Front Leg
   rotate: false
-  xy: 53, 2
+  xy: 52, 2
   size: 25, 59
   orig: 25, 59
   offset: 0, 0

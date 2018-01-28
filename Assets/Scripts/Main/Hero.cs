@@ -57,7 +57,7 @@ public class Hero : HeroModel
 
         this.UpdateOpaMode(InputManager.instance.m_CurOpaMode);
         this.CreateWeapons();
-        m_PrepareChangeParticle.SetActive(false);
+        if (m_PrepareChangeParticle) m_PrepareChangeParticle.SetActive(false);
         m_AniMng.SwitchWeaponTextrue(m_CurWeapon.m_SpineSkinName,
         m_CurWeapon.m_WeaponID, m_HeroID);
         if (m_ChargeSlider) m_ChargeSlider.gameObject.SetActive(false);

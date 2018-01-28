@@ -371,7 +371,7 @@ MonoBehaviour:
   m_BeAtkWidth: 0
   m_HPSlider: {fileID: 0}
   m_Dmgs:
-  - {fileID: 1330773663461712, guid: 94e027327ca8b4cb7abc858e56215362, type: 2}
+  - {fileID: 1330773663461712, guid: 5aa8ec3faf291ea4a9df38bcbd7b76d1, type: 2}
   m_MidPos: {fileID: 4643954671977992}
   m_AtkStartPos: {fileID: 4414026182676270}
   m_ParticlePos_Dust: {fileID: 0}
