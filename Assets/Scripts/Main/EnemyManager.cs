@@ -39,6 +39,7 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
+        CreateEnemyWave();
         this.StartCreateEnemy();
     }
 
@@ -59,7 +60,7 @@ public class EnemyManager : MonoBehaviour
     }
     public void CreateEnemyWave()
     {
-        CreateEnemyWave(3, 0, 0, 6, 8);
+        CreateEnemyWave(8, 0, 0, 6, 8);
     }
     private void CreateEnemyWave(int num, float anchorX, float anchorY, float mixArea, float maxArea)
     {
