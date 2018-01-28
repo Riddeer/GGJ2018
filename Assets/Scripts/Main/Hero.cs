@@ -137,6 +137,8 @@ public class Hero : HeroModel
     {
         if (!m_IsInDisForTransmission) return;
 
+        this.Talk("COME ON", 3f);
+
         m_IsReadyForTransmission = true;
         if (m_OtherHero.m_IsReadyForTransmission)
         {
