@@ -127,9 +127,7 @@ public abstract class RoleBase : MonoBehaviour
 
         // create dic
         this.CreateDmgDic();
-        this.
-
-        InitNavNBehaviorTree();
+        this.InitNavNBehaviorTree();
     }
 
     public void SetLayer()
