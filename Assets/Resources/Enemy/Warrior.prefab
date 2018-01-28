@@ -364,8 +364,8 @@ MonoBehaviour:
   m_BaseType: -1
   m_MoveVec: 1
   m_MaxHP: 100
-  m_AlertRange: 10
-  m_AtkRange: 3
+  m_AlertRange: 5
+  m_AtkRange: 1
   m_AtkInterval: 0.5
   m_HurtProtectTime: 0.5
   m_BeAtkWidth: 0

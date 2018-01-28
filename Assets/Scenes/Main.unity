@@ -574,7 +574,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 34623701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 666.6666, y: -375, z: 0}
+  m_LocalPosition: {x: 666.6045, y: -375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 813923635}
@@ -934,7 +934,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 80874118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 666.6666, y: 375, z: 0}
+  m_LocalPosition: {x: 666.6045, y: 375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 832868233}
@@ -11214,126 +11214,6 @@ MonoBehaviour:
     volume: 0.2
     pitch: 1
     loop: 1
-    source: {fileID: 0}
-  - name: Slime_Crow_01
-    clip: {fileID: 8300000, guid: b09a31fb5530442b19db8e2820a02f85, type: 3}
-    volume: 0.3
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Slime_Attacked_01
-    clip: {fileID: 8300000, guid: 18f8ea505c9cc409a8964396123244ea, type: 3}
-    volume: 0.3
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Lancer_Step_01
-    clip: {fileID: 8300000, guid: 5ce89e62af26740c184f40c9fb2738e4, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Slime_Attacked_02
-    clip: {fileID: 8300000, guid: d7463798a8bea4584bdd029b0d9b1b86, type: 3}
-    volume: 0.3
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Slime_Death_01
-    clip: {fileID: 8300000, guid: 5e4114c43f78a44e2a29ff625cd6fc34, type: 3}
-    volume: 0.3
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Lancer_Attack_01
-    clip: {fileID: 8300000, guid: d2442338817a64e3898fbadac33881be, type: 3}
-    volume: 0.2
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: BGM_Noise_Rain_01
-    clip: {fileID: 8300000, guid: f74c79c513d2e45c4ba929e3b514f0a7, type: 3}
-    volume: 0.4
-    pitch: 1
-    loop: 1
-    source: {fileID: 0}
-  - name: BGM_Noise_Thunder_01
-    clip: {fileID: 8300000, guid: f5f183a9ed1344ab1b17bcc6ac605864, type: 3}
-    volume: 0.6
-    pitch: 1
-    loop: 1
-    source: {fileID: 0}
-  - name: Slime_Step_01
-    clip: {fileID: 8300000, guid: 4a3b2e6445eed425c94d0a6ef9f081fb, type: 3}
-    volume: 0.15
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Slime_Attack_01
-    clip: {fileID: 8300000, guid: 0ed13310e9bcc4571836b431f68c72d4, type: 3}
-    volume: 0.3
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Lancer_Crow_01
-    clip: {fileID: 8300000, guid: 1a0b03396f3664f5d9aa045c15e103d9, type: 3}
-    volume: 0.3
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: BGM_Noise_CutTree_01
-    clip: {fileID: 8300000, guid: 42644a631f3f4482a9b18479bfc71a76, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Slime_Attack_02
-    clip: {fileID: 8300000, guid: ffbb61f4095604130ada33cc8c9a25a3, type: 3}
-    volume: 0.2
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Weapon_Laser_01
-    clip: {fileID: 8300000, guid: 77e43bc7d3a6146019752929cd98cf7a, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Weapon_FireBall_01
-    clip: {fileID: 8300000, guid: 3f776ba755ba71341bb3f527c8369c60, type: 3}
-    volume: 0.499
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Lancer_Death_01
-    clip: {fileID: 8300000, guid: 8195b2ca137314cecae01bfbd176bc5b, type: 3}
-    volume: 0.499
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Explosion_FireBall_01
-    clip: {fileID: 8300000, guid: 388cce0d555a14244b38c3e107ccd191, type: 3}
-    volume: 0.452
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Spawn_FireBall_01
-    clip: {fileID: 8300000, guid: be9da6aeaf9154599a5b9016b6ba04d4, type: 3}
-    volume: 0.452
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: Weapon_Line_01
-    clip: {fileID: 8300000, guid: 2127f3c40bff243988556647f9573db3, type: 3}
-    volume: 0.452
-    pitch: 1
-    loop: 0
-    source: {fileID: 0}
-  - name: UI_Click_01
-    clip: {fileID: 8300000, guid: 65c780cd05bc44241bad8fde0cf8c7ed, type: 3}
-    volume: 0.452
-    pitch: 1
-    loop: 0
     source: {fileID: 0}
 --- !u!4 &542297647
 Transform:
@@ -31833,7 +31713,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1292976839}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -666.6666, y: -375, z: 0}
+  m_LocalPosition: {x: -666.6045, y: -375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1365735644}
@@ -33036,8 +32916,8 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1365735640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 960, y: 540, z: 0}
-  m_LocalScale: {x: 1.44, y: 1.44, z: 1.44}
+  m_LocalPosition: {x: 595.5, y: 335, z: 0}
+  m_LocalScale: {x: 0.8933333, y: 0.8933333, z: 0.8933333}
   m_Children:
   - {fileID: 34623702}
   - {fileID: 1631526372}
@@ -46767,7 +46647,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1631526371}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -666.6666, y: 375, z: 0}
+  m_LocalPosition: {x: -666.6045, y: 375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1568914418}
