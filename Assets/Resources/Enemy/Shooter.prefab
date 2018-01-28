@@ -307,7 +307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skeletonRenderer: {fileID: 114791603824728566}
-  boneName: atk_pos
+  boneName: Atk_pos
   followZPosition: 1
   followBoneRotation: 1
   followSkeletonFlip: 1
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BaseType: -1
-  m_MoveVec: 1
+  m_MoveVec: 2
   m_MaxHP: 100
   m_AlertRange: 5
   m_AtkRange: 3
