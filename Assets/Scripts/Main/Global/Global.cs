@@ -105,7 +105,7 @@ public class Global : MonoBehaviour
             textSq.Append(m_TimeOutText.DOText("3", (float)actionDur));
             textSq.Append(m_TimeOutText.DOText("2", 1f));
             textSq.Append(m_TimeOutText.DOText("1", 1f));
-            textSq.Append(m_TimeOutText.DOText("GO", 1f));
+            // textSq.Append(m_TimeOutText.DOText("GO", 1f));
             textSq.AppendInterval(0.2f);
             textSq.OnComplete(delegate ()
             {

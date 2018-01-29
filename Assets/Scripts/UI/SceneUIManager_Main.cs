@@ -70,7 +70,7 @@ public class SceneUIManager_Main : MonoBehaviour
     public void ReturnToSceneExStart()
     {
         
-
+        SceneManager.LoadScene(0);
     }
 
 }
