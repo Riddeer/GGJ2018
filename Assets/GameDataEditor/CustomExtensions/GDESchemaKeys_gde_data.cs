@@ -15,10 +15,5 @@ namespace GameDataEditor
 {
     public partial class GDESchemaKeys
     {
-        public static string Hero = "Hero";
-        public static string Enemy = "Enemy";
-        public static string Weapon = "Weapon";
-        public static string Enum_OpaType = "Enum_OpaType";
-        public static string Enum_WeaponAniType = "Enum_WeaponAniType";
     }
 }

@@ -262,8 +262,7 @@ MonoBehaviour:
   m_UnitDuration: 0.01
   m_LoopTimes: 2
   m_FadeTime: 1
-  m_ColParticle: {fileID: 1690978613588666, guid: 6ed1e77cc3b254afb9fb9f4aa06eb327,
-    type: 2}
+  m_ColParticle: {fileID: 0}
   m_ColParticlePos: {fileID: 4701860446310624}
   m_Res: {fileID: 212149810795332212}
   m_AtkedSpSheet:
@@ -371,5 +370,5 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0

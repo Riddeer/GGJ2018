@@ -15,19 +15,5 @@ namespace GameDataEditor
 {
     public partial class GDEItemKeys
     {
-        public static string Hero_Hero_SpaceKnight = "Hero_SpaceKnight";
-        public static string Enemy_Enemy_Slime = "Enemy_Slime";
-        public static string Weapon_Weapon_Line = "Weapon_Line";
-        public static string Weapon_Weapon_Line_Two = "Weapon_Line_Two";
-        public static string Weapon_Weapon_Laser = "Weapon_Laser";
-        public static string Weapon_Weapon_Bezier = "Weapon_Bezier";
-        public static string Weapon_Weapon_Boomerang = "Weapon_Boomerang";
-        public static string Weapon_Weapon_Hold = "Weapon_Hold";
-        public static string Weapon_Weapon_Charge = "Weapon_Charge";
-        public static string Enum_OpaType_OnePunch = "OnePunch";
-        public static string Enum_OpaType_Hold = "Hold";
-        public static string Enum_OpaType_Charge = "Charge";
-        public static string Enum_WeaponAniType_OneHand = "OneHand";
-        public static string Enum_WeaponAniType_TwoHands = "TwoHands";
     }
 }

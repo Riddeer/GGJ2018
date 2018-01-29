@@ -118,7 +118,7 @@ public abstract class RoleBase : MonoBehaviour
         m_Canvas = GetComponentInChildren<Canvas>();
 
         m_IE_Attack = null;
-        m_Invincible = false;
+        m_Invincible = true;// test
         m_IE_StopInvicible = null;
         m_CurVec_Move = Vector2.right;
         m_NextDustPlayTime = 0;
