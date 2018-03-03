@@ -143,7 +143,7 @@ public class HeroModel : RoleBase
         // Audio play
         float pitch = 0.8f + UnityEngine.Random.Range(-0.3f, 0.3f);
 
-        AudioManager.instance.Play(Get_Death_AudioName(), pitch);
+        // AudioManager.instance.Play(Get_Death_AudioName(), pitch);
         if (m_PrepareChangeParticle) m_PrepareChangeParticle.SetActive(false);//hero
         if (m_AniMng != null)
         {
@@ -469,7 +469,8 @@ public class HeroModel : RoleBase
     }
     public override void HandleEvent(TrackEntry trackEntry, Spine.Event e)
     {
-        if (e.Data.Name == Constants.SpineEventName_Attack)
+        if (e.Data.Name == Constants.SpineEventName_Attack || 
+        e.data.Name == Constants.SpineEventName_attack)
         {
             this.AtkAnimationEvent();
             AudioManager.instance.Play(m_CurWeapon.m_Audio);

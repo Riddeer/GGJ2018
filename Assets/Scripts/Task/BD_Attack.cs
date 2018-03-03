@@ -22,11 +22,18 @@ public class BD_Attack : Action
     }
     public override TaskStatus OnUpdate()
     {
-        if (isRobot)
-        {
-           m_Enemy.Attack();
-        }
-        else if (Time.time > (temp + m_AtkInterval))
+        // if (isRobot)
+        // {
+        //    m_Enemy.Attack();
+        // }
+        // else if (Time.time > (temp + m_AtkInterval))
+        // {
+        //     m_Enemy.Attack();
+
+        //     temp = Time.time;
+        // }
+
+        if (Time.time > (temp + m_AtkInterval))
         {
             m_Enemy.Attack();
 

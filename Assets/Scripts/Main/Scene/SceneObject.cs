@@ -81,7 +81,7 @@ public class SceneObject : MonoBehaviour
             }
             // audio
             float pitch = 0.9f + UnityEngine.Random.Range(-0.3f, 0.3f);
-            AudioManager.instance.Play(Constants.BGM_Noise_CutTree_01);
+            // AudioManager.instance.Play(Constants.BGM_Noise_CutTree_01);
 
             if (m_CurAtkedIdx == m_AtkedSpSheet.Count - 1 && !m_CannotBeDestroy)
             {

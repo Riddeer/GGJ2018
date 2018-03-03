@@ -82,6 +82,10 @@ public class Hero : HeroModel
         {
             return;
         }
+        if (m_CurStatus == RoleStatus.Die)
+        {
+            return;
+        }
         if (m_OpaMode == OperateMode.AutoFindEnemies)
         {
             if (!GetCurAtkTargetList().Contains(m_CurAtkTar))
