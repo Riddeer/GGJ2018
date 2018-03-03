@@ -92,7 +92,7 @@ MonoBehaviour:
   m_OnlyEftOnce: 1
   m_EftInterval: 0.1
   m_Thrust: 400
-  m_DamageVal: 30
+  m_DamageVal: 10
   m_CritPercent: 0
   m_CritDmg: 1
   m_EffectVal: 1

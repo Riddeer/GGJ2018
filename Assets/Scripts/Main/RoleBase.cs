@@ -118,7 +118,7 @@ public abstract class RoleBase : MonoBehaviour
         m_Canvas = GetComponentInChildren<Canvas>();
 
         m_IE_Attack = null;
-        m_Invincible = true;// test
+        m_Invincible = false;// test
         m_IE_StopInvicible = null;
         m_CurVec_Move = Vector2.right;
         m_NextDustPlayTime = 0;
@@ -145,11 +145,11 @@ public abstract class RoleBase : MonoBehaviour
         else
         {
             gameObject.layer = LayerMask.NameToLayer("Alliance");
-                // set m_TarLayer : Scene + Zhongli + Difang   enemy neutral
-                m_TarLayer = 1 << LayerMask.NameToLayer("Enemy")
-                    | 1 << LayerMask.NameToLayer("Neutral")
-                    | 1 << LayerMask.NameToLayer("Scene")
-                    | 1 << LayerMask.NameToLayer("Plane");
+            // set m_TarLayer : Scene + Zhongli + Difang   enemy neutral
+            m_TarLayer = 1 << LayerMask.NameToLayer("Enemy")
+                | 1 << LayerMask.NameToLayer("Neutral")
+                | 1 << LayerMask.NameToLayer("Scene")
+                | 1 << LayerMask.NameToLayer("Plane");
         }
     }
 
@@ -586,6 +586,8 @@ public abstract class RoleBase : MonoBehaviour
         if (m_CurStatus == RoleStatus.Die) return;
         m_CurStatus = RoleStatus.Attack;
 
+        // Debug.Log(gameObject.name + " is Attack()");
+
         m_CurAtkGO = (GameObject)Resources.Load("Attack/" + dmgPrefab.name);
         Damage dmgCO = m_CurAtkGO.GetComponent<Damage>();
         if (dmgCO != null)
@@ -598,6 +600,9 @@ public abstract class RoleBase : MonoBehaviour
     {
         if (m_CurAtkGO == null) return null;
         Vector3 startPos = this.GetAtkStartPos();
+        
+        // Debug.Log(gameObject.name + " is CreateDmg()");
+
         // float vecLength = (startPos - this.GetMidPos()).magnitude;
         // startPos = vecLength * this.GetCurFaceVec().normalized;
         // startPos += this.GetMidPos();

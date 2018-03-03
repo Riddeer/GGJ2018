@@ -52,11 +52,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_WeaponName: Line
-  id: 0
+  m_WeaponID: 0
   m_OpaType: 0
   m_AniType: 0
   m_Dmg: {fileID: 1398094515145142, guid: 0725baf7f763e47f18f9b64aad57bd2a, type: 2}
-  m_AtkInterval: 0.2
+  m_AtkInterval: 1.2
   m_SpineSkinName: Line
   m_Audio: Weapon_Line_01
   m_ChargeTime: 0
@@ -64,5 +64,6 @@ MonoBehaviour:
   m_ConsumePerHit: 1
   m_ReloadTime: 1
   m_AlertRange: 10
-  prepareFireTime: 0.7
-  isCastType: 0
+  prepareFireTime: 0
+  m_AimType: 0
+  m_CurBullet: 0

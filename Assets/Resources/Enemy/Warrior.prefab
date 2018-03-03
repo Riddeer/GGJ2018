@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 61021500464894884}
   - component: {fileID: 58266543964231386}
   - component: {fileID: 50853527817222082}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Warrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -363,10 +363,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_BaseType: -1
   m_MoveVec: 2.5
-  m_MaxHP: 100
+  m_MaxHP: 30
   m_AlertRange: 4
   m_AtkRange: 2
-  m_AtkInterval: 0.5
+  m_AtkInterval: 1.5
   m_HurtProtectTime: 0.5
   m_BeAtkWidth: 0
   m_HPSlider: {fileID: 0}
