@@ -12708,6 +12708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1570300632}
   - component: {fileID: 1570300633}
+  - component: {fileID: 1570300634}
   m_Layer: 0
   m_Name: BG
   m_TagString: Untagged
@@ -12772,6 +12773,20 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!114 &1570300634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1570300631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 267974d6be5f74b4f93fb176348ad43b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SlipVal_1: 2
+  m_SlipVal_2: 3
+  m_MaxResNumInS2: 2
 --- !u!1001 &1574079685
 Prefab:
   m_ObjectHideFlags: 0
