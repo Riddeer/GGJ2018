@@ -75,7 +75,7 @@ namespace qtools.qhierarchy.phelper
                 
                 Rect curRect = new Rect(rect.x, rect.y + 18 * i, rect.width, 16);
                 
-                if (!dragAndDrop && currentEvent.type == EventType.mouseDown && curRect.Contains(currentEvent.mousePosition))
+                if (!dragAndDrop && currentEvent.type == EventType.MouseDown && curRect.Contains(currentEvent.mousePosition))
                 {
                     dragAndDrop = true;
                     originalDragIndex = i;
