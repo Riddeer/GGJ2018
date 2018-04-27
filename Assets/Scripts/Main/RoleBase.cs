@@ -98,6 +98,8 @@ public abstract class RoleBase : MonoBehaviour
     private Vector2 tempJoyStickVec = Vector2.zero;
     private IEnumerator m_IE_MoveTo = null;
     private IEnumerator m_IE_Talk = null;
+    private float m_EffectiveVal = 1f;
+
     public RoleBase CurAtkTar
     {
         get { return m_CurAtkTar; }
@@ -124,6 +126,7 @@ public abstract class RoleBase : MonoBehaviour
         m_NextDustPlayTime = 0;
         m_IE_MoveTo = null;
         if (m_TalkText) m_TalkText.text = "";
+        m_EffectiveVal = 1f;
 
         // create dic
         this.CreateDmgDic();
@@ -485,7 +488,7 @@ public abstract class RoleBase : MonoBehaviour
 
         vec = vec.normalized;
         this.SetCurVec_Move(vec);
-        vec *= m_MoveVec;
+        vec *= m_MoveVec * m_EffectiveVal;
 
         Rigidbody rig = GetComponent<Rigidbody>();
         if (rig != null)
@@ -514,6 +517,11 @@ public abstract class RoleBase : MonoBehaviour
                 m_NextDustPlayTime = Time.time + m_DustPlayInterval;
             }
         }
+    }
+
+    public void SetEffectiveVal(float val)
+    {
+        m_EffectiveVal = val;
     }
 
     public void SetCurVec_Move(Vector2 vec)

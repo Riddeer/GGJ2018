@@ -28,6 +28,7 @@ public class Hero : HeroModel
     public GameObject m_CurTarMark;
     public GameObject[] m_WeaponsToCreate;
     public float m_SuckSpeed = 10f;
+    public float m_FatEndDownSpeed = 0.1f;
 
     // [HideInInspector]
     public bool m_IsReadyForTransmission = false;
@@ -41,6 +42,8 @@ public class Hero : HeroModel
     private const float m_TransmissionDis = 3f;
     private IEnumerator m_IE_SuckPool;
     private WaterPool m_CurSuckPool;
+    private float m_Endurance = 1f;
+    private IEnumerator m_IE_EndDown = null;
 
     protected override void Awake()
     {
@@ -49,6 +52,8 @@ public class Hero : HeroModel
         m_IsInDisForTransmission = false;
         m_IE_SuckPool = null;
         m_CurSuckPool = null;
+        m_Endurance = 1f;
+        m_IE_EndDown = null;
     }
 
     protected override void Start()
@@ -172,7 +177,7 @@ public class Hero : HeroModel
         // set face 
         bool otherIsRight = m_OtherHero.GetFootPos().x > this.GetFootPos().x;
         // this.SetFlipX(!otherIsRight);
-        this.SetCurVec_Move( otherIsRight ? Vector2.right: Vector2.left);
+        this.SetCurVec_Move(otherIsRight ? Vector2.right : Vector2.left);
 
         // set position
         if (m_CurTransType == TransmissionType.Thin)
@@ -383,7 +388,7 @@ public class Hero : HeroModel
         if (m_IsReloading) return;
         if (m_BulletText)
         {
-            m_BulletText.text = m_CurWeapon.m_CurBullet + 
+            m_BulletText.text = m_CurWeapon.m_CurBullet +
                 " / " + m_AllBullet;
         }
 
@@ -439,13 +444,33 @@ public class Hero : HeroModel
         {
             case TransmissionType.Fat:
                 {
-                    m_MoveVec = 1f;
+                    m_MoveVec = 3f;
+
+                    if (m_IE_EndDown != null)
+                    {
+                        StopCoroutine(m_IE_EndDown);
+                        m_IE_EndDown = null;
+                    }
+                    m_Endurance = 1f;
+                    this.SetEffectiveVal(m_Endurance);
+
+                    m_IE_EndDown = IE_MinusEndurance(m_FatEndDownSpeed);
+                    StartCoroutine(m_IE_EndDown);
                 }
                 break;
 
             case TransmissionType.Thin:
                 {
                     m_MoveVec = 3f;
+
+                    if (m_IE_EndDown != null)
+                    {
+                        StopCoroutine(m_IE_EndDown);
+                        m_IE_EndDown = null;
+                    }
+
+                    m_Endurance = 1f;
+                    this.SetEffectiveVal(m_Endurance);
                 }
                 break;
 
@@ -454,6 +479,22 @@ public class Hero : HeroModel
         }
 
         m_AniMng.SetCurTransmissionRes(m_CurTransType);
+    }
+
+    private IEnumerator IE_MinusEndurance(float speed)
+    {
+        while (true)
+        {
+            if (Global.instance.m_GameStart)
+            {
+                m_Endurance -= Time.deltaTime * speed;
+                m_Endurance = Mathf.Clamp(m_Endurance, 0f, 1f);
+                this.SetEffectiveVal(m_Endurance);
+                // Debug.Log(gameObject.name + " " + m_Endurance);
+            }
+
+            yield return null;
+        }
     }
 
     protected override void OnTrigger(Collider2D col)
