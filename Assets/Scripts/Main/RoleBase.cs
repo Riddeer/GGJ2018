@@ -608,7 +608,7 @@ public abstract class RoleBase : MonoBehaviour
     {
         if (m_CurAtkGO == null) return null;
         Vector3 startPos = this.GetAtkStartPos();
-        
+
         // Debug.Log(gameObject.name + " is CreateDmg()");
 
         // float vecLength = (startPos - this.GetMidPos()).magnitude;
@@ -917,30 +917,20 @@ public abstract class RoleBase : MonoBehaviour
     }
 
 
-    public virtual void HandleEvent(TrackEntry trackEntry, Spine.Event e)
+    public void HandleEvent(TrackEntry trackEntry, Spine.Event e)
     {
-        // if (m_PhotonView != null && !m_PhotonView.isMine) return;
+        this.HandleEvent(e.Data.Name);
+    }
 
-        if (e.Data.Name == Constants.SpineEventName_Attack ||
-        e.Data.Name == Constants.SpineEventName_attack)
+    public virtual void HandleEvent(string key)
+    {
+        if (string.IsNullOrEmpty(key)) return;
+
+        if (string.Compare(key, Constants.SpineEventName_Attack) == 0 ||
+        string.Compare(key, Constants.SpineEventName_attack) == 0)
         {
             this.AtkAnimationEvent();
         }
-        if (e.Data.Name == Constants.SpineEventName_Step || e.Data.Name == "Run")
-        {
-            float pitch = 0.9f + UnityEngine.Random.Range(-0.15f, 0.15f);
-            // footstepAudioSource.Play();
-            // AudioManager.instance.Play(Get_Step_AudioName(), pitch);
-        }
-        // if(e.Data.Name == "Run")
-        // {
-        //     float pitch = 0.9f + UnityEngine.Random.Range(-0.15f, 0.15f);
-        //     // footstepAudioSource.Play();
-        //     AudioManager.instance.Play("Slime_Step_01",pitch);
-        // }
-
-
-
     }
 
     protected virtual void AtkAnimationEvent()

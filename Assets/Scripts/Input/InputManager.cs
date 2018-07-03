@@ -224,7 +224,7 @@ public class InputManager : MonoBehaviour
 
     public void InputCommand(Hero player, CommandType cType, params object[] vals)
     {
-        if (!Global.instance.m_GameStart) return;
+        if (!Global.instance.m_Gaming) return;
 
         // Hero player = Global.instance.m_Hero_01;
         if (player == null) return;
@@ -298,7 +298,7 @@ public class InputManager : MonoBehaviour
 
             case CommandType.RollWeapon:
                 {
-                    player.RollWeapon();
+                    // player.RollWeapon();
                 }
                 break;
             case CommandType.CastAttack:

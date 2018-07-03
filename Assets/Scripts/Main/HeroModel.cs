@@ -467,25 +467,10 @@ public class HeroModel : RoleBase
             yield return new WaitForSeconds(m_CurWeapon.m_AtkInterval);
         }
     }
-    public override void HandleEvent(TrackEntry trackEntry, Spine.Event e)
-    {
-        if (e.Data.Name == Constants.SpineEventName_Attack || 
-        e.data.Name == Constants.SpineEventName_attack)
-        {
-            this.AtkAnimationEvent();
-            AudioManager.instance.Play(m_CurWeapon.m_Audio);
-        }
-        if (e.Data.Name == Constants.SpineEventName_Step ||
-            e.Data.Name == m_AniMng.m_AniName_Move)
-        {
-            float pitch = 0.9f + UnityEngine.Random.Range(-0.15f, 0.15f);
-            // footstepAudioSource.Play();
-            AudioManager.instance.Play(Get_Step_AudioName(), pitch);
-        }
-    }
 
     protected override void AtkAnimationEvent()
     {
+        AudioManager.instance.Play(m_CurWeapon.m_Audio);
         switch (m_CurWeapon.m_OpaType)
         {
             case WeaponOperateType.OnePunch:

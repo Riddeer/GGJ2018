@@ -16,10 +16,10 @@ public class RoleAnimation : MonoBehaviour
         Size
     }
 
-
-    public BoneFollower m_BoneFollower;
     public SkeletonAnimation m_SkeAnimation_0;
     public SkeletonAnimation m_SkeAnimation_1;
+    public Animator m_Animator_0;
+    public Animator m_Animator_1;
 
     [SpineAnimation(dataField: "m_SkeAnimation_0")]
     public string m_AniName_Move = "Move_01";
@@ -30,10 +30,6 @@ public class RoleAnimation : MonoBehaviour
     [SpineAnimation(dataField: "m_SkeAnimation_0")]
     public string m_AniName_TransMission = "Transmission";
     public AttackAimType m_AtkAimType = AttackAimType.Aim;
-    public Transform[] m_NormalRotate;
-    public Transform[] m_LessRotate;
-    public float armRotateRange = 1;
-    public float bodyRotateRange = 1;
     public float m_AimTurnSpeed = 5f;
 
     public RotatedSpineNodes[] m_AimNodes;
@@ -45,21 +41,28 @@ public class RoleAnimation : MonoBehaviour
     private float m_CurAlpha = 1f;
     private Color m_CurColor = Color.white;
     private string m_CurAtkName = "";
-    private List<Vector3> normalV3 = new List<Vector3>();
-    private List<Vector3> lessV3 = new List<Vector3>();
     // private Hero m_player;
     void Awake()
     {
-        m_Base = gameObject.GetComponent<RoleBase>();
-
-        m_DefaultTimeScale = m_SkeAnimation_0.timeScale;
+        m_Base = GetComponent<RoleBase>();
+        if (m_SkeAnimation_0)
+        {
+            m_DefaultTimeScale = m_SkeAnimation_0.timeScale;
+        }
+        else
+        {
+            m_DefaultTimeScale = 1;
+        }
     }
 
     // Use this for initialization
     void Start()
     {
-        m_SkeAnimation_0.state.Event += m_Base.HandleEvent;
-        m_SkeAnimation_0.state.Complete += m_Base.HandleComplete;
+        if (m_SkeAnimation_0)
+        {
+            m_SkeAnimation_0.state.Event += m_Base.HandleEvent;
+            m_SkeAnimation_0.state.Complete += m_Base.HandleComplete;
+        }
         if (m_SkeAnimation_1)
         {
             m_SkeAnimation_1.state.Event += m_Base.HandleEvent;
@@ -86,11 +89,17 @@ public class RoleAnimation : MonoBehaviour
     public void Move()
     {
         this.RunAnimation(m_AniName_Move, true, 0, false);
+
+        if (m_Animator_0) m_Animator_0.SetTrigger("Move");
+        if (m_Animator_1) m_Animator_1.SetTrigger("Move");
     }
 
     public void Idle()
     {
         this.RunAnimation(m_AniName_Idle, true, 0, false);
+
+        if (m_Animator_0) m_Animator_0.SetTrigger("Idle");
+        if (m_Animator_1) m_Animator_1.SetTrigger("Idle");
     }
 
     public void Attack(string aniName)
@@ -98,96 +107,19 @@ public class RoleAnimation : MonoBehaviour
         m_CurAtkName = aniName;
 
         this.RunAnimation(aniName, false, 1, true);
+
+        if (m_Animator_0) m_Animator_0.SetTrigger("Attack");
+        if (m_Animator_1) m_Animator_1.SetTrigger("Attack");
     }
     public void Transmission()
     {
         this.RunAnimation(m_AniName_TransMission, false, 0, false);
     }
-    // this attack is used by hero to switch weapon
-    public void SwitchWeaponTextrue(string skinName, WeaponID weaponID, HeroID heroID)
-    {
-        // var weaponData = GDEManager.instance.GetData_Weapon((int)weaponID);
-        // string boneName = "AtkPos_" + skinName;
-        // m_BoneFollower.SetBone(boneName);
-        // switch (heroID)
-        // {
-        //     case HeroID.SpaceKnight:
-        //         {
-        //             if (weaponData.AniType.ID == 0)
-        //             {
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Arm_R", "Arm_R");
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Arm_L", "Arm_L");
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Hand_Hold", null);
 
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Gun", skinName);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Gun_01", null);
-
-
-        //             }
-        //             else if (weaponData.AniType.ID == 1)
-        //             {
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Arm_R", null);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Arm_L", null);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Hand_Hold", "BothHand");
-
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Gun", null);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Gun_01", skinName);
-
-        //             }
-        //         }
-        //         break;
-
-        //     case HeroID.IdiotKnight:
-        //         {
-        //             if (weaponData.AniType.ID == 0)
-        //             {
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Hand_hold", null);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Armor3", null);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Arm_R3", null);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Gun_01", null);
-
-
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Gun", skinName);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Armor", "Armor 2");
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Hand_R", "Hand_R");
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Arm_R", "Arm_R");
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Hand_L", "Hand_L");
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Arm_L", "Arm_L");
-
-        //             }
-        //             else if (weaponData.AniType.ID == 1)
-        //             {
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Hand_hold", "Hand_hold");
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Armor3", "Armor");
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Arm_R3", "Arm_R");
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Gun_01", skinName);
-
-
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Gun", null);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Armor", null);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Hand_R", null);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Arm_R", null);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Hand_L", null);
-        //                 m_SkeAnimation.Skeleton.SetAttachment("Arm_L", null);
-
-        //             }
-        //         }
-        //         break;
-
-        //     default:
-        //         break;
-        // }
-    }
-
-    public void SetSkin(string skinName)
-    {
-        m_SkeAnimation_0.skeleton.SetSkin(skinName);
-        if (m_SkeAnimation_1) m_SkeAnimation_1.skeleton.SetSkin(skinName);
-    }
     public void Stop(int trackIndex)
     {
         // TrackEntry track = m_SkeAnimation.state.GetCurrent(trackIndex);
-        m_SkeAnimation_0.state.ClearTrack(trackIndex);
+        if (m_SkeAnimation_0) m_SkeAnimation_0.state.ClearTrack(trackIndex);
         if (m_SkeAnimation_1) m_SkeAnimation_0.state.ClearTrack(trackIndex);
     }
 
@@ -203,33 +135,6 @@ public class RoleAnimation : MonoBehaviour
     {
         return m_CurAtkName;
     }
-    public void Wink()
-    {
-        this.RunAnimation("Face_Wink", false, 3, false);
-        var empty = m_SkeAnimation_0.state.AddEmptyAnimation(3, 0.5f, 0.1f);
-        empty.AttachmentThreshold = 1f;
-
-    }
-    public void DefaultFace()
-    {
-        this.RunAnimation("Face_Default", true, 3, false);
-    }
-    public void AngryFace()
-    {
-        this.RunAnimation("Face_Attack", false, 4, false);
-        var empty = m_SkeAnimation_0.state.AddEmptyAnimation(4, 0.5f, 1f);
-        empty.AttachmentThreshold = 1f;
-    }
-    public void StartSetWink()
-    {
-        if (m_IE_Wink != null)
-        {
-            StopCoroutine(m_IE_Wink);
-            m_IE_Wink = null;
-        }
-        m_IE_Wink = SetWink();
-        StartCoroutine(m_IE_Wink);
-    }
     public void StopWink()
     {
         if (m_IE_Wink != null)
@@ -238,43 +143,23 @@ public class RoleAnimation : MonoBehaviour
             m_IE_Wink = null;
         }
     }
-    IEnumerator SetWink()
-    {
-        while (true)
-        {
-            Wink();
-            yield return new WaitForSeconds(Random.Range(0.1f, 2f));
-        }
-    }
     public void Die()
     {
-        // PauseAnimation();
-        // m_SkeAnimation.state.ClearTracks();
-        m_SkeAnimation_0.state.ClearTracks();
+        if (m_SkeAnimation_0) m_SkeAnimation_0.state.ClearTracks();
         if (m_SkeAnimation_1) m_SkeAnimation_1.state.ClearTracks();
         this.RunAnimation(m_AniName_Die, false, 5, false);
-
-        // falling action
-        // Soldier soldier = m_Base as Soldier;
-        // if (soldier != null && soldier.m_Height > 0.5f)
-        // {
-        // 	float deadActTime = this.GetCurAniTime();
-        // 	transform.DOMoveY(0.5f, deadActTime).SetEase(Ease.Linear)
-        // 		.OnUpdate(delegate ()
-        // 		{
-        // 			soldier.m_Shadow.transform.SetPosition_Y(0);
-        // 		});
-        // }
     }
 
     public void PauseAnimation()
     {
-        m_SkeAnimation_0.timeScale = 0;
+        if (m_SkeAnimation_0) m_SkeAnimation_0.timeScale = 0;
         if (m_SkeAnimation_1) m_SkeAnimation_1.timeScale = 0;
     }
 
     public float GetCurAniTime()
     {
+        if (!m_SkeAnimation_0) return 0f;
+
         Spine.TrackEntry curEntry = m_SkeAnimation_0.state.GetCurrent(0);
         if (curEntry != null)
         {
@@ -304,6 +189,8 @@ public class RoleAnimation : MonoBehaviour
     public bool RunAnimation(string aniName, bool loop, int index,
         bool overrideSameName = false)
     {
+        if (m_SkeAnimation_0 == null && m_SkeAnimation_1 == null) return false;
+
         bool isPlayingTheSame = false;
         if (m_SkeAnimation_0 && m_SkeAnimation_0.state.GetCurrent(0) != null)
             isPlayingTheSame = m_SkeAnimation_0.state.GetCurrent(0).Animation.Name == aniName;
@@ -410,23 +297,16 @@ public class RoleAnimation : MonoBehaviour
         // mpb.SetColor("_Color", m_CurColor);
         // mpb.SetColor("_OccludedColor", m_CurColor);
         mpb.SetFloat("_PlaneAlpha", m_CurAlpha);
-        m_SkeAnimation_0.GetComponent<MeshRenderer>().SetPropertyBlock(mpb);
+        if (m_SkeAnimation_0) m_SkeAnimation_0.GetComponent<MeshRenderer>().SetPropertyBlock(mpb);
         if (m_SkeAnimation_1) m_SkeAnimation_1.GetComponent<MeshRenderer>().SetPropertyBlock(mpb);
     }
 
     private void SetTimeScale(float s)
     {
-        m_SkeAnimation_0.timeScale = s;
+        if (m_SkeAnimation_0) m_SkeAnimation_0.timeScale = s;
         if (m_SkeAnimation_1) m_SkeAnimation_1.timeScale = s;
     }
 
-
-    public float GetAlpha()
-    {
-        Material material = m_SkeAnimation_0.GetComponent<Renderer>().material;
-        // return material.GetColor("_Color").a;
-        return material.GetFloat("_PlaneAlpha");
-    }
     private void AimTarget(Transform[] transList, float rotateRange, List<Vector3> defaultV3List, Vector2 curFaceVec)
     {
         switch (m_AtkAimType)
@@ -538,15 +418,19 @@ public class RoleAnimation : MonoBehaviour
         {
             case TransmissionType.Fat:
                 {
-                    m_SkeAnimation_0.gameObject.SetActive(true);
-                    m_SkeAnimation_1.gameObject.SetActive(false);
+                    if (m_SkeAnimation_0) m_SkeAnimation_0.gameObject.SetActive(true);
+                    if (m_SkeAnimation_1) m_SkeAnimation_1.gameObject.SetActive(false);
+                    if (m_Animator_0) m_Animator_0.gameObject.SetActive(true);
+                    if (m_Animator_1) m_Animator_1.gameObject.SetActive(false);
                 }
                 break;
 
             case TransmissionType.Thin:
                 {
-                    m_SkeAnimation_0.gameObject.SetActive(false);
-                    m_SkeAnimation_1.gameObject.SetActive(true);
+                    if (m_SkeAnimation_0) m_SkeAnimation_0.gameObject.SetActive(false);
+                    if (m_SkeAnimation_1) m_SkeAnimation_1.gameObject.SetActive(true);
+                    if (m_Animator_0) m_Animator_0.gameObject.SetActive(false);
+                    if (m_Animator_1) m_Animator_1.gameObject.SetActive(true);
                 }
                 break;
 

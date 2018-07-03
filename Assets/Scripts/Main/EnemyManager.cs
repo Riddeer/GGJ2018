@@ -39,7 +39,7 @@ public class EnemyManager : MonoBehaviour
 
     void Start()
     {
-        CreateEnemyWave();
+        // CreateEnemyWave();
         this.StartCreateEnemy();
     }
 
@@ -47,7 +47,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (!m_StartCreateEnemy) return;
 
-        if (!Global.instance.m_GameStart) return;
+        if (!Global.instance.m_Gaming) return;
 
         // while (m_Enemies.Count < m_MaxEnemyNum)
         // {
@@ -96,28 +96,6 @@ public class EnemyManager : MonoBehaviour
 
         }
 
-    }
-    private void SetDataByCrossSceneDataMng()
-    {
-        CrossSceneDataManager crossMng = CrossSceneDataManager.instance;
-        if (crossMng == null) return;
-
-        switch (crossMng.m_NetworkMode)
-        {
-            case NetworkMode.PVP_Solo:
-            case NetworkMode.PVP_Double:
-                {
-                    m_MaxEnemyNum = 0;
-                }
-                break;
-
-            case NetworkMode.PVE_Solo:
-            case NetworkMode.PVE_Double:
-                {
-                    m_MaxEnemyNum = 1;
-                }
-                break;
-        }
     }
 
     public void StartCreateEnemy()

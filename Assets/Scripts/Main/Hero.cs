@@ -63,8 +63,6 @@ public class Hero : HeroModel
         this.UpdateOpaMode(InputManager.instance.m_CurOpaMode);
         this.CreateWeapons();
         if (m_PrepareChangeParticle) m_PrepareChangeParticle.SetActive(false);
-        m_AniMng.SwitchWeaponTextrue(m_CurWeapon.m_SpineSkinName,
-        m_CurWeapon.m_WeaponID, m_HeroID);
         if (m_ChargeSlider) m_ChargeSlider.gameObject.SetActive(false);
 
         m_CurTarMark.SetActive(false);
@@ -83,7 +81,7 @@ public class Hero : HeroModel
     }
     protected override void Update()
     {
-        if (!Global.instance.m_GameStart)
+        if (!Global.instance.m_Gaming)
         {
             return;
         }
@@ -212,29 +210,6 @@ public class Hero : HeroModel
         // InputManager.instance.InitWeaponUIText();
     }
 
-
-
-    public void RollWeapon()
-    {
-        int idx = m_CreatedWeapons.FindIndex(a => a == m_CurWeapon);
-
-        idx++;
-        if (idx == m_CreatedWeapons.Count) idx = 0;
-
-        m_CurWeapon = m_CreatedWeapons[idx];
-
-        // clear data
-        m_CurAtkGO = null;
-        if (m_DmgEft != null)
-        {
-            m_DmgEft.DestroySelf();
-        }
-        // role weapon textrue
-        // is not longer need AtkAnimationName,now we need spine weapon textrue name
-        m_AniMng.SwitchWeaponTextrue(m_CurWeapon.m_SpineSkinName,
-            m_CurWeapon.m_WeaponID, m_HeroID);
-    }
-
     public override List<RoleBase> GetCurAtkTargetList()
     {
         List<RoleBase> enemies = new List<RoleBase>();
@@ -330,6 +305,7 @@ public class Hero : HeroModel
         base.Die();
         CameraEffect.instance.Shake(0.2f, 1f, 0.1f);
 
+        Global.instance.GameOver();
 
         SetPlayerAliveStatus(false);
     }
@@ -485,7 +461,7 @@ public class Hero : HeroModel
     {
         while (true)
         {
-            if (Global.instance.m_GameStart)
+            if (Global.instance.m_Gaming)
             {
                 m_Endurance -= Time.deltaTime * speed;
                 m_Endurance = Mathf.Clamp(m_Endurance, 0f, 1f);

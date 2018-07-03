@@ -35,7 +35,7 @@ public class SceneUIManager_Main : MonoBehaviour
     void Update()
     {
         if (Global.instance == null) return;
-        if (!Global.instance.m_GameStart) return;
+        if (!Global.instance.m_Gaming) return;
 
         this.CheckResult();
     }

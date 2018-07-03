@@ -19,10 +19,10 @@ public class MapGenerator : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
-        {
-            this.CreateList();
-        }
+        // if (Input.GetMouseButtonUp(0))
+        // {
+        //     this.CreateList();
+        // }
     }
 
     private void CreateList()

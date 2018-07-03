@@ -38,7 +38,7 @@ public class Global : MonoBehaviour
     [HideInInspector]
     public List<Hero> m_Hero_All = new List<Hero>();
     [HideInInspector]
-    public bool m_GameStart = false;
+    public bool m_Gaming = false;
     public ResultType m_ResultType = ResultType.NULL;
     private readonly float m_TimeOutDur = 4f;
 
@@ -54,7 +54,7 @@ public class Global : MonoBehaviour
 
     void Awake()
     {
-        m_GameStart = false;
+        m_Gaming = false;
 
         m_Hero_All.Clear();
         m_Hero_All.Add(m_Hero_01);
@@ -67,30 +67,6 @@ public class Global : MonoBehaviour
         // send game start time out
         float tarTime = Time.time + m_TimeOutDur;
         StartCoroutine(IE_WaiteForGameStart(tarTime));
-    }
-
-    // Use this for initialization
-
-    void Update()
-    {
-
-        this.CheckGameResult();
-    }
-
-    private void CheckGameResult()
-    {
-        if (!m_GameStart) return;
-        if (m_Hero_01 == null || m_Hero_02 == null) return;
-
-        if (m_Hero_01.m_CurStatus == RoleStatus.Die ||
-        m_Hero_02.m_CurStatus == RoleStatus.Die)
-        {
-            m_ResultType = ResultType.Loss;
-        }
-        else
-        {
-
-        }
     }
 
     public IEnumerator IE_WaiteForGameStart(double tarT)
@@ -140,13 +116,17 @@ public class Global : MonoBehaviour
 
     public void GameStart()
     {
-        m_GameStart = true;
+        m_Gaming = true;
         m_Hero_01.SetPlayerAliveStatus(true);
         m_Hero_02.SetPlayerAliveStatus(true);
     }
 
     public void GameOver()
     {
+        m_Gaming = false;
+
+        m_ResultType = ResultType.Loss;
+        
         CameraEffect.instance.CameraEffect_GameOver();
     }
 

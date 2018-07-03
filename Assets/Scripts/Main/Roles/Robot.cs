@@ -35,9 +35,6 @@ public class Robot : HeroModel
     protected override void Start()
     {
         base.Start();
-        m_AniMng.StartSetWink();
-        m_AniMng.SwitchWeaponTextrue(m_CurWeapon.m_SpineSkinName,
-            m_CurWeapon.m_WeaponID, m_HeroID);
     }
     protected override void Update()
     {
@@ -80,25 +77,6 @@ public class Robot : HeroModel
             return gun;
         }
         else return (int)m_Gun;
-    }
-    public void RollWeapon()
-    {
-        int idx = m_CreatedWeapons.FindIndex(a => a == m_CurWeapon);
-
-        idx++;
-        if (idx == m_CreatedWeapons.Count) idx = 0;
-        m_CurWeapon = m_CreatedWeapons[idx];
-
-        // clear data
-        m_CurAtkGO = null;
-        if (m_DmgEft != null)
-        {
-            m_DmgEft.DestroySelf();
-        }
-        // role weapon textrue
-        // is not longer need AtkAnimationName,now we need spine weapon textrue name
-        m_AniMng.SwitchWeaponTextrue(m_CurWeapon.m_SpineSkinName,
-            m_CurWeapon.m_WeaponID, m_HeroID);
     }
     protected override void OnTrigger(Collider2D col)
     {
