@@ -75,6 +75,7 @@ public class Effect : MonoBehaviour
         m_EndPos = m_StartPos;
         m_Time = 0f;
 
+        this.UpdateRotation(m_TarVec);
     }
 
     void Awake()
@@ -137,7 +138,7 @@ public class Effect : MonoBehaviour
             default:
                 {
 
-                    this.UpdateRotation(m_TarVec);
+                    // this.UpdateRotation(m_TarVec);
                     Invoke("DestroySelf", m_DestroyDelay);
                 }
                 break;

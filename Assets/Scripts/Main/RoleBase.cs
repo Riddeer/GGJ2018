@@ -135,21 +135,21 @@ public abstract class RoleBase : MonoBehaviour
 
     public void SetLayer()
     {
-        if (this is Hero || this is Robot)
+        if (this is Hero)
         {
             // Neutral
-            gameObject.layer = LayerMask.NameToLayer("Neutral");
+            gameObject.layer = LayerMask.NameToLayer("Alliance");
 
             m_TarLayer = 1 << LayerMask.NameToLayer("Enemy")
-                | 1 << LayerMask.NameToLayer("Alliance")
+                | 1 << LayerMask.NameToLayer("Neutral")
                 | 1 << LayerMask.NameToLayer("Scene")
                 | 1 << LayerMask.NameToLayer("Plane");
         }
         else
         {
-            gameObject.layer = LayerMask.NameToLayer("Alliance");
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
             // set m_TarLayer : Scene + Zhongli + Difang   enemy neutral
-            m_TarLayer = 1 << LayerMask.NameToLayer("Enemy")
+            m_TarLayer = 1 << LayerMask.NameToLayer("Alliance")
                 | 1 << LayerMask.NameToLayer("Neutral")
                 | 1 << LayerMask.NameToLayer("Scene")
                 | 1 << LayerMask.NameToLayer("Plane");
