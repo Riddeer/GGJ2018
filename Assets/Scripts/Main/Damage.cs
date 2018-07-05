@@ -69,6 +69,7 @@ public class Damage : MonoBehaviour
     [HideInInspector]
     public List<RoleBase> m_EffectedBases = new List<RoleBase>();
 
+    public int m_RoleLayer { get; private set;}
 
     private long m_Add_Dmg = 0;
 
@@ -79,7 +80,7 @@ public class Damage : MonoBehaviour
 
     void Start()
     {
-
+        
     }
 
     public void Init(RoleBase creater, RoleBase tar)
@@ -88,6 +89,7 @@ public class Damage : MonoBehaviour
 
         m_TarRole = tar;
 
+        m_RoleLayer = m_RoleBase.gameObject.layer;
     }
 
     public void GetAddAtt(long add_Dmg, float add_CritPer, float add_CritDmg)

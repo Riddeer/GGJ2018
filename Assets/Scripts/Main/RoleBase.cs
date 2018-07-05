@@ -812,7 +812,7 @@ public abstract class RoleBase : MonoBehaviour
 
     public virtual void GetDamage(Damage colDmg)
     {
-        if (colDmg.m_RoleBase.gameObject.layer == gameObject.layer)
+        if (colDmg.m_RoleLayer == gameObject.layer)
         {
             return;
         }

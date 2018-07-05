@@ -35,6 +35,8 @@ public class EnemyManager : MonoBehaviour
     void Awake()
     {
         // this.SetDataByCrossSceneDataMng();
+
+        m_Enemies = new List<RoleBase>();
     }
 
     void Start()
@@ -120,7 +122,7 @@ public class EnemyManager : MonoBehaviour
     {
         // Debug.Log(enemy.name + " is been destroyed");
         m_Enemies.Remove(enemy);
-        GameObject.Destroy(enemy.gameObject, 2f);
+        GameObject.Destroy(enemy.gameObject);
     }
 
     public void InitEnemyStatus(RoleStatus status)

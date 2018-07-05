@@ -150,6 +150,12 @@ public class RoleAnimation : MonoBehaviour
         this.RunAnimation(m_AniName_Die, false, 5, false);
     }
 
+    public void SetTrigger(string trigger)
+    {
+        if (m_Animator_0) m_Animator_0.SetTrigger(trigger);
+        if (m_Animator_1) m_Animator_1.SetTrigger(trigger);
+    }
+
     public void PauseAnimation()
     {
         if (m_SkeAnimation_0) m_SkeAnimation_0.timeScale = 0;
