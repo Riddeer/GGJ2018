@@ -148,6 +148,9 @@ public class RoleAnimation : MonoBehaviour
         if (m_SkeAnimation_0) m_SkeAnimation_0.state.ClearTracks();
         if (m_SkeAnimation_1) m_SkeAnimation_1.state.ClearTracks();
         this.RunAnimation(m_AniName_Die, false, 5, false);
+
+        if (m_Animator_0) m_Animator_0.SetTrigger("Die");
+        if (m_Animator_1) m_Animator_1.SetTrigger("Die");
     }
 
     public void SetTrigger(string trigger)

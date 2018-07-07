@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PlayType: -1
-  m_DestroyDelay: 5
+  m_DestroyDelay: 1
   m_MoveVec: 1
   m_BezierCtrlHight: 0.3
   m_BezierEndParticle: {fileID: 0}

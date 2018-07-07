@@ -931,6 +931,11 @@ public abstract class RoleBase : MonoBehaviour
         {
             this.AtkAnimationEvent();
         }
+
+        if (string.Compare(key, Constants.SpineEventName_Death) == 0)
+        {
+            this.RemoveSelf();
+        }
     }
 
     protected virtual void AtkAnimationEvent()

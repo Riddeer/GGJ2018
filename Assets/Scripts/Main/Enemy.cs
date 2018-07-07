@@ -94,18 +94,18 @@ public class Enemy : RoleBase
         base.OnTrigger(col);
     }
 
-    public override void Die()
-    {
+    // public override void Die()
+    // {
 
-        m_CurStatus = RoleStatus.Die;
+    //     m_CurStatus = RoleStatus.Die;
 
-        // Audio play
-        float pitch = 0.8f + UnityEngine.Random.Range(-0.3f, 0.3f);
+    //     // Audio play
+    //     float pitch = 0.8f + UnityEngine.Random.Range(-0.3f, 0.3f);
 
-        AudioManager.instance.Play(Get_Death_AudioName(), pitch);
-        CameraEffect.instance.Shake(0.2f, 1f, 0.1f);
+    //     AudioManager.instance.Play(Get_Death_AudioName(), pitch);
+    //     CameraEffect.instance.Shake(0.2f, 1f, 0.1f);
 
-        this.RemoveSelf();
-    }
+    //     this.RemoveSelf();
+    // }
 
 }
